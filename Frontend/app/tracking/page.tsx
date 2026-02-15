@@ -5,7 +5,9 @@ import { motion } from 'framer-motion';
 import Card from '@/components/Card';
 import FloatingMetro from '@/components/FloatingMetro';
 import ParticlesBackground from '@/components/ParticlesBackground';
+
 import { metroStations } from '@/lib/mockData';
+import { staggerContainer, slideUp } from '@/lib/animations';
 
 export default function TrackingPage() {
     const [currentLocation, setCurrentLocation] = useState({ lat: 18.5204, lng: 73.8567 });
@@ -31,10 +33,14 @@ export default function TrackingPage() {
 
             <FloatingMetro type="train" size="sm" className="top-20 right-10" delay={0} />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <motion.div
+                className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+            >
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    variants={slideUp}
                     className="mb-8"
                 >
                     <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
@@ -45,7 +51,10 @@ export default function TrackingPage() {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <motion.div
+                    className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+                    variants={slideUp}
+                >
                     {/* Map Area */}
                     <div className="lg:col-span-2">
                         <Card className="h-[600px] relative overflow-hidden border-none">
@@ -176,8 +185,8 @@ export default function TrackingPage() {
                             </div>
                         </Card>
                     </div>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </div>
     );
 }

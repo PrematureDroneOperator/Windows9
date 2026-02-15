@@ -9,6 +9,7 @@ import FloatingMetro from '@/components/FloatingMetro';
 import ParticlesBackground from '@/components/ParticlesBackground';
 import { rideHistory, stats } from '@/lib/mockData';
 import { FaClock, FaMapMarkerAlt, FaRupeeSign, FaChartLine } from 'react-icons/fa';
+import { staggerContainer, slideUp } from '@/lib/animations';
 
 export default function DashboardPage() {
     return (
@@ -18,11 +19,15 @@ export default function DashboardPage() {
             <FloatingMetro type="train" size="md" className="top-20 right-10" delay={0} />
             <FloatingMetro type="station" size="sm" className="bottom-40 left-10" delay={1.5} />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <motion.div
+                className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+            >
                 {/* Welcome Section */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    variants={slideUp}
                     className="mb-12"
                 >
                     <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
@@ -34,7 +39,10 @@ export default function DashboardPage() {
                 </motion.div>
 
                 {/* Quick Actions */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
+                    variants={slideUp}
+                >
                     <Link href="/tracking">
                         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                             <Card className="gradient-metro text-white cursor-pointer border-none">
@@ -62,10 +70,13 @@ export default function DashboardPage() {
                             </Card>
                         </motion.div>
                     </Link>
-                </div>
+                </motion.div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                <motion.div
+                    className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
+                    variants={slideUp}
+                >
                     <Card className="text-center bg-white/10 backdrop-blur-md border-white/20 text-white">
                         <div className="text-3xl mb-2 text-metro-red">
                             <FaChartLine className="mx-auto" />
@@ -97,9 +108,12 @@ export default function DashboardPage() {
                         <p className="text-3xl font-bold text-white">{stats.moneySaved}</p>
                         <p className="text-gray-300">Money Saved</p>
                     </Card>
-                </div>
+                </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <motion.div
+                    className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+                    variants={slideUp}
+                >
                     {/* Ride History */}
                     <div className="lg:col-span-2">
                         <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
@@ -205,8 +219,8 @@ export default function DashboardPage() {
                             </div>
                         </Card>
                     </div>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </div>
     );
 }
