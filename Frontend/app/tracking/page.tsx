@@ -142,7 +142,7 @@ export default function TrackingPage() {
                         </Card>
 
                         {/* Driver Info */}
-                        <Card className="gradient-metro text-white border-none">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
                             <h3 className="text-xl font-bold mb-4">Driver Details</h3>
                             <div className="flex items-center mb-4">
                                 <div className="text-5xl mr-4">👨‍✈️</div>

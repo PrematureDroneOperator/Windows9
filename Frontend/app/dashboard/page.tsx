@@ -140,7 +140,7 @@ export default function DashboardPage() {
                     {/* Sidebar */}
                     <div className="space-y-6">
                         {/* Upcoming Rides */}
-                        <Card className="bg-metro-dark/80 backdrop-blur-md border-metro-teal/30 text-white shadow-lg shadow-metro-teal/10">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white shadow-lg">
                             <h3 className="text-xl font-bold mb-4 text-metro-teal">Upcoming Rides</h3>
                             <div className="space-y-3">
                                 <div className="p-3 rounded-lg bg-white/5 border border-white/10">
@@ -155,7 +155,7 @@ export default function DashboardPage() {
                         </Card>
 
                         {/* Pass Subscription */}
-                        <Card className="bg-gradient-metro text-white border-none">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
                             <h3 className="text-xl font-bold mb-4">Monthly Pass</h3>
                             <div className="space-y-3">
                                 <div className="flex justify-between">
