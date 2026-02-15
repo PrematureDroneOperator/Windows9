@@ -1,16 +1,20 @@
 # main.py
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
+from pydantic import BaseModel
 from agent import agent_reply
 
 app = FastAPI()
 
-@app.post("/webhook")
-async def whatsapp_webhook(req: Request):
-    data = await req.json()
+# Define the request body schema
+class WhatsAppPayload(BaseModel):
+    user: str
+    message: str
 
-    # simulate WhatsApp payload
-    user_id = data["user"]
-    message = data["message"]
+@app.post("/webhook")
+async def whatsapp_webhook(payload: WhatsAppPayload):
+    # Access validated fields
+    user_id = payload.user
+    message = payload.message
 
     reply = agent_reply(user_id, message)
 

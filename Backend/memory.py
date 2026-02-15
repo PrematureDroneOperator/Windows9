@@ -10,4 +10,6 @@ def get_session(user_id):
             "destination": None,
             "ride_type": None
         }
+        print(f"New session created for user: {user_id}")
+        print(f"Current active sessions: {user_sessions}")
     return user_sessions[user_id]

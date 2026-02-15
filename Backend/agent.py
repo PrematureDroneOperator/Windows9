@@ -11,7 +11,7 @@ def agent_reply(user_id, message):
     if "metro" in msg or "station" in msg:
         session["destination"] = message
         session["state"] = "await_pickup"
-
+        print("the session is - ", session)
         return "Please share your pickup location."
 
     # ---- STEP 2: pickup received ----
@@ -23,9 +23,15 @@ def agent_reply(user_id, message):
 
         session["state"] = "choose_ride"
 
+        # return (
+        #     f"Distance: {route['distance']}\n"
+        #     f"ETA: {route['duration']}\n\n"
+        #     "Choose ride:\n"
+        #     "1️⃣ Auto\n"
+        #     "2️⃣ Bike Taxi"
+        # )
         return (
-            f"Distance: {route['distance']}\n"
-            f"ETA: {route['duration']}\n\n"
+            f"{route}\n\n"
             "Choose ride:\n"
             "1️⃣ Auto\n"
             "2️⃣ Bike Taxi"
