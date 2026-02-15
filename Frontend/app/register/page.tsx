@@ -79,7 +79,7 @@ export default function RegisterPage() {
                 >
                     {/* Title */}
                     <div className="text-center mb-8">
-                        <h1 className="text-4xl font-display font-bold text-white mb-2">Join Windows 9</h1>
+                        <h1 className="text-4xl font-display font-bold text-white mb-2">Join Roadचल</h1>
                         <p className="text-gray-300">Create your account and start your journey</p>
                     </div>
 

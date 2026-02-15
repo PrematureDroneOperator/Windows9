@@ -5,7 +5,12 @@ import type { Container, Engine } from "tsparticles-engine";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 
-const ParticlesBackground = () => {
+interface ParticlesBackgroundProps {
+    id?: string;
+    color?: string;
+}
+
+const ParticlesBackground = ({ id = "tsparticles", color = "#bf00ff" }: ParticlesBackgroundProps) => {
     const particlesInit = useCallback(async (engine: Engine) => {
         await loadSlim(engine);
     }, []);
@@ -13,7 +18,7 @@ const ParticlesBackground = () => {
     return (
         <div className="absolute inset-0 z-0 pointer-events-none">
             <Particles
-                id="tsparticles"
+                id={id}
                 init={particlesInit}
                 className="absolute inset-0"
                 options={{
@@ -48,17 +53,17 @@ const ParticlesBackground = () => {
                     },
                     particles: {
                         color: {
-                            value: "#bf00ff", // Neon Purple
+                            value: color,
                         },
                         links: {
-                            color: "#bf00ff",
+                            color: color,
                             distance: 150,
                             enable: true,
                             opacity: 0.3,
                             width: 1,
                             shadow: {
                                 enable: true,
-                                color: "#bf00ff",
+                                color: color,
                                 blur: 5
                             }
                         },

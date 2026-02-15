@@ -16,7 +16,7 @@ const Footer = () => {
                         <div className="flex items-center space-x-2">
                             <span className="text-3xl">🚇</span>
                             <span className="text-xl font-display font-bold text-gradient">
-                                Windows 9
+                                Roadचल
                             </span>
                         </div>
                         <p className="text-gray-300 text-sm">
@@ -99,7 +99,7 @@ const Footer = () => {
                 </div>
 
                 <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
-                    <p>&copy; {currentYear} Windows 9. All rights reserved. | Powered by Pune Metro</p>
+                    <p>&copy; {currentYear} Roadचल. All rights reserved. | Powered by Pune Metro</p>
                 </div>
             </div>
         </footer>

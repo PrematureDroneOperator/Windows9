@@ -14,9 +14,10 @@ import ParticlesBackground from '@/components/ParticlesBackground';
 export default function Home() {
     return (
         <main className="min-h-screen relative">
-            <ParticlesBackground />
+
             {/* Hero Section */}
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-metro-dark via-gray-800 to-metro-dark">
+                <ParticlesBackground id="particles-hero" />
                 {/* Floating Metro Elements */}
                 <FloatingMetro type="train" size="lg" className="top-20 left-10" delay={0} />
                 <FloatingMetro type="station" size="md" className="top-40 right-20" delay={1} />
@@ -39,7 +40,7 @@ export default function Home() {
                             variants={fadeIn}
                             className="text-5xl md:text-7xl font-display font-bold text-white mb-6"
                         >
-                            Windows 9
+                            Roadचल
                         </motion.h1>
                         <motion.h2
                             variants={slideUp}
@@ -79,6 +80,7 @@ export default function Home() {
 
             {/* How It Works Section */}
             <section className="py-20 bg-white relative overflow-hidden">
+                <ParticlesBackground id="particles-how-it-works" color="#2B2D42" />
                 <FloatingMetro type="train" size="md" className="top-10 right-5" delay={0} />
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -117,6 +119,7 @@ export default function Home() {
 
             {/* Key Benefits Section */}
             <section className="py-20 bg-gradient-to-br from-metro-light to-white relative overflow-hidden">
+                <ParticlesBackground id="particles-benefits" color="#2B2D42" />
                 <FloatingMetro type="station" size="lg" className="bottom-10 left-5" delay={1} />
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -127,7 +130,7 @@ export default function Home() {
                         className="text-center mb-16"
                     >
                         <h2 className="text-4xl md:text-5xl font-display font-bold text-metro-dark mb-4">
-                            Why Choose Windows 9?
+                            Why Choose Roadचल?
                         </h2>
                         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                             Built for modern commuters who value time and convenience
@@ -150,6 +153,7 @@ export default function Home() {
 
             {/* App Screenshots Section */}
             <section className="py-20 bg-metro-dark text-white relative overflow-hidden">
+                <ParticlesBackground id="particles-screenshots" />
                 <FloatingMetro type="train" size="lg" className="top-20 right-10" delay={0.5} />
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -182,6 +186,7 @@ export default function Home() {
 
             {/* Testimonials Section */}
             <section className="py-20 bg-white relative overflow-hidden">
+                <ParticlesBackground id="particles-testimonials" color="#2B2D42" />
                 <FloatingMetro type="icon" size="md" className="top-20 left-10" delay={1} />
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -219,6 +224,7 @@ export default function Home() {
 
             {/* CTA Section */}
             <section className="py-20 bg-gradient-metro text-white relative overflow-hidden">
+                <ParticlesBackground id="particles-cta" />
                 <FloatingMetro type="train" size="lg" className="top-10 left-20" delay={0} />
                 <FloatingMetro type="station" size="md" className="bottom-10 right-20" delay={1} />
 
@@ -232,7 +238,7 @@ export default function Home() {
                             Ready to Transform Your Commute?
                         </h2>
                         <p className="text-xl mb-8">
-                            Join Windows 9 today and experience hassle-free metro connectivity
+                            Join Roadचल today and experience hassle-free metro connectivity
                         </p>
                         <Link href="/register">
                             <motion.button

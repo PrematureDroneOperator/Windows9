@@ -8,12 +8,14 @@ import Card from '@/components/Card';
 import Button from '@/components/Button';
 import { features } from '@/lib/mockData';
 import { fadeIn, slideUp } from '@/lib/animations';
+import ParticlesBackground from '@/components/ParticlesBackground';
 
 export default function LandingPage() {
     return (
         <main className="min-h-screen">
             {/* Hero Section */}
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-metro-dark via-gray-800 to-metro-dark">
+                <ParticlesBackground id="particles-about-hero" />
                 <FloatingMetro type="train" size="lg" className="top-20 left-10" delay={0} />
                 <FloatingMetro type="station" size="md" className="bottom-20 right-20" delay={1} />
 
@@ -42,7 +44,8 @@ export default function LandingPage() {
             </section>
 
             {/* Feature Highlights */}
-            <section className="py-20 bg-white">
+            <section className="py-20 bg-white relative">
+                <ParticlesBackground id="particles-features" color="#2B2D42" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-display font-bold text-metro-dark mb-4">
@@ -69,6 +72,7 @@ export default function LandingPage() {
 
             {/* Pune Metro Integration */}
             <section className="py-20 bg-gradient-to-br from-metro-light to-white relative overflow-hidden">
+                <ParticlesBackground id="particles-integration" color="#2B2D42" />
                 <FloatingMetro type="train" size="lg" className="top-10 right-10" delay={0} />
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -82,7 +86,7 @@ export default function LandingPage() {
                                 Seamless Pune Metro Integration
                             </h2>
                             <p className="text-lg text-gray-600 mb-6">
-                                Windows 9 connects you to all major Pune Metro stations including Vanaz, Anand Nagar,
+                                Roadचल connects you to all major Pune Metro stations including Vanaz, Anand Nagar,
                                 Deccan Gymkhana, Civil Court, and Swargate. We optimize routes to ensure you never miss your metro.
                             </p>
                             <ul className="space-y-4">
@@ -117,7 +121,8 @@ export default function LandingPage() {
             </section>
 
             {/* App Screenshots */}
-            <section className="py-20 bg-metro-dark text-white">
+            <section className="py-20 bg-metro-dark text-white relative">
+                <ParticlesBackground id="particles-about-screenshots" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
@@ -146,6 +151,7 @@ export default function LandingPage() {
 
             {/* Download CTA */}
             <section className="py-20 bg-gradient-metro text-white relative overflow-hidden">
+                <ParticlesBackground id="particles-about-cta" />
                 <FloatingMetro type="train" size="lg" className="top-10 left-10" delay={0} />
                 <FloatingMetro type="station" size="md" className="bottom-10 right-20" delay={1} />
 

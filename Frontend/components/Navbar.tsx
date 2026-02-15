@@ -43,7 +43,7 @@ const Navbar = () => {
                         >
                             <span className="text-3xl">🚇</span>
                             <span className="text-2xl font-display font-bold text-gradient">
-                                Windows 9
+                                Roadचल
                             </span>
                         </motion.div>
                     </Link>
