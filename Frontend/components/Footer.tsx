@@ -2,13 +2,16 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { FaGithub, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
+    const pathname = usePathname();
+    const isHome = ['/', '/landing', '/dashboard', '/tracking', '/login', '/register'].includes(pathname);
 
     return (
-        <footer className="bg-metro-dark text-white py-12">
+        <footer className={`${isHome ? 'bg-transparent border-t border-white/10' : 'bg-metro-dark'} text-white py-12 relative z-50`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Brand */}

@@ -78,31 +78,41 @@ body {
 
 /* Floating animations */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) translateX(0px);
   }
+
   33% {
     transform: translateY(-20px) translateX(10px);
   }
+
   66% {
     transform: translateY(-10px) translateX(-10px);
   }
 }
 
 @keyframes float-horizontal {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateX(0px);
   }
+
   50% {
     transform: translateX(30px);
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     box-shadow: 0 0 20px rgba(6, 214, 160, 0.5);
   }
+
   50% {
     opacity: 0.8;
     box-shadow: 0 0 40px rgba(6, 214, 160, 0.8);
@@ -136,26 +146,21 @@ body {
 
 /* Button styles */
 .btn-primary {
-  @apply bg-metro-red text-white px-6 py-3 rounded-lg font-semibold 
-         transition-all duration-300 hover:bg-opacity-90 hover:shadow-xl
-         hover:scale-105 active:scale-95;
+  @apply bg-metro-red text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-opacity-90 hover:shadow-xl hover:scale-105 active:scale-95;
 }
 
 .btn-secondary {
-  @apply bg-metro-teal text-white px-6 py-3 rounded-lg font-semibold 
-         transition-all duration-300 hover:bg-opacity-90 hover:shadow-xl
-         hover:scale-105 active:scale-95;
+  @apply bg-metro-teal text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-opacity-90 hover:shadow-xl hover:scale-105 active:scale-95;
 }
 
 .btn-outline {
-  @apply border-2 border-metro-red text-metro-red px-6 py-3 rounded-lg 
-         font-semibold transition-all duration-300 hover:bg-metro-red 
-         hover:text-white hover:shadow-xl hover:scale-105 active:scale-95;
+  @apply border-2 border-metro-red text-metro-red px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-metro-red hover:text-white hover:shadow-xl hover:scale-105 active:scale-95;
 }
 
 /* Card hover effects */
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-2;
+  @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer;
+  transition-property: transform, box-shadow, background-color, border-color;
 }
 
 /* Text gradient */
