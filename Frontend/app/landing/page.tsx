@@ -9,10 +9,11 @@ import Button from '@/components/Button';
 import { features } from '@/lib/mockData';
 import { fadeIn, slideUp } from '@/lib/animations';
 import ParticlesBackground from '@/components/ParticlesBackground';
+import CTA from '@/components/CTA';
 
 export default function LandingPage() {
     return (
-        <main className="min-h-screen relative">
+        <main className="min-h-screen relative flex flex-col">
             {/* Global Fixed Background */}
             <div className="fixed inset-0 z-0 bg-gradient-to-br from-metro-dark via-gray-800 to-metro-dark">
                 <ParticlesBackground id="particles-global-about" />
@@ -22,7 +23,7 @@ export default function LandingPage() {
             </div>
 
             {/* Content Container - z-10 to sit above background */}
-            <div className="relative z-10">
+            <div className="relative z-10 flex-1">
 
                 {/* Hero Section */}
                 <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -156,37 +157,10 @@ export default function LandingPage() {
                     </div>
                 </section>
 
-                {/* Download CTA */}
-                <section className="py-20 bg-gradient-metro text-white relative overflow-hidden">
-                    <ParticlesBackground id="particles-about-cta" />
-                    <FloatingMetro type="train" size="lg" className="top-10 left-10" delay={0} />
-                    <FloatingMetro type="station" size="md" className="bottom-10 right-20" delay={1} />
+            </div>
 
-                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                        <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-                            Start Your Smarter Commute Today
-                        </h2>
-                        <p className="text-xl mb-8">
-                            Available on iOS and Android. Download now and get your first ride free!
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="bg-white text-metro-red px-8 py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2"
-                            >
-                                <span className="text-2xl">📱</span> Download for iOS
-                            </motion.button>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="bg-white text-metro-red px-8 py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2"
-                            >
-                                <span className="text-2xl">🤖</span> Download for Android
-                            </motion.button>
-                        </div>
-                    </div>
-                </section>
+            <div className="relative z-10">
+                <CTA />
             </div>
         </main>
     );

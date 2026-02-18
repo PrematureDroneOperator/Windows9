@@ -8,7 +8,7 @@ import { FaGithub, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
 const Footer = () => {
     const currentYear = new Date().getFullYear();
     const pathname = usePathname();
-    const isHome = ['/', '/landing', '/dashboard', '/tracking', '/login', '/register'].includes(pathname);
+    const isHome = ['/', '/landing', '/dashboard', '/tracking', '/login', '/register', '/chatbot', '/contact', '/privacy', '/terms', '/help', '/metro-details'].includes(pathname);
 
     return (
         <footer className={`${isHome ? 'bg-transparent border-t border-white/10' : 'bg-metro-dark'} text-white py-12 relative z-50`}>
@@ -42,6 +42,11 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li>
+                                <Link href="/metro-details" className="hover:text-metro-teal transition-colors">
+                                    Metro Details
+                                </Link>
+                            </li>
+                            <li>
                                 <Link href="/tracking" className="hover:text-metro-teal transition-colors">
                                     Track Ride
                                 </Link>
@@ -59,24 +64,24 @@ const Footer = () => {
                         <h3 className="font-semibold text-lg mb-4">Support</h3>
                         <ul className="space-y-2 text-gray-300">
                             <li>
-                                <a href="#" className="hover:text-metro-teal transition-colors">
+                                <Link href="/help" className="hover:text-metro-teal transition-colors">
                                     Help Center
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-metro-teal transition-colors">
+                                <Link href="/contact" className="hover:text-metro-teal transition-colors">
                                     Contact Us
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-metro-teal transition-colors">
+                                <Link href="/privacy" className="hover:text-metro-teal transition-colors">
                                     Privacy Policy
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-metro-teal transition-colors">
+                                <Link href="/terms" className="hover:text-metro-teal transition-colors">
                                     Terms of Service
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>

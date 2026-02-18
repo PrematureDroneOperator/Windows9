@@ -20,7 +20,10 @@ const Navbar = () => {
     const navLinks = [
         { href: '/', label: 'Home' },
         { href: '/landing', label: 'About' },
+        { href: '/metro-details', label: 'Metro' },
         { href: '/tracking', label: 'Track' },
+        { href: '/chatbot', label: 'Chat' },
+        { href: '/contact', label: 'Contact' },
         { href: '/dashboard', label: 'Dashboard' },
         { href: '/login', label: 'Login' }
     ];

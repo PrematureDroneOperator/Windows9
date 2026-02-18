@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Card from '@/components/Card';
 import FloatingMetro from '@/components/FloatingMetro';
 import ParticlesBackground from '@/components/ParticlesBackground';
+import CTA from '@/components/CTA';
 
 import { metroStations } from '@/lib/mockData';
 import { staggerContainer, slideUp } from '@/lib/animations';
@@ -28,7 +29,7 @@ export default function TrackingPage() {
     }, []);
 
     return (
-        <div className="min-h-screen relative">
+        <main className="min-h-screen relative flex flex-col">
             {/* Global Fixed Background */}
             <div className="fixed inset-0 z-0 bg-gradient-to-br from-metro-dark via-gray-800 to-metro-dark">
                 <ParticlesBackground id="particles-tracking" />
@@ -38,7 +39,7 @@ export default function TrackingPage() {
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 py-20 overflow-hidden">
+            <div className="relative z-10 py-20 overflow-hidden flex-1">
                 <FloatingMetro type="train" size="sm" className="top-20 right-10" delay={0} />
 
                 <motion.div
@@ -196,6 +197,10 @@ export default function TrackingPage() {
                     </motion.div>
                 </motion.div>
             </div>
-        </div>
+
+            <div className="relative z-10">
+                <CTA />
+            </div>
+        </main>
     );
 }

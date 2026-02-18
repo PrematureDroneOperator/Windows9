@@ -7,13 +7,14 @@ import Card from '@/components/Card';
 import Button from '@/components/Button';
 import FloatingMetro from '@/components/FloatingMetro';
 import ParticlesBackground from '@/components/ParticlesBackground';
+import CTA from '@/components/CTA';
 import { rideHistory, stats } from '@/lib/mockData';
 import { FaClock, FaMapMarkerAlt, FaRupeeSign, FaChartLine } from 'react-icons/fa';
 import { staggerContainer, slideUp } from '@/lib/animations';
 
 export default function DashboardPage() {
     return (
-        <div className="min-h-screen relative">
+        <main className="min-h-screen relative flex flex-col">
             {/* Global Fixed Background */}
             <div className="fixed inset-0 z-0 bg-gradient-to-br from-metro-dark via-gray-800 to-metro-dark">
                 <ParticlesBackground id="particles-dashboard" />
@@ -23,7 +24,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 py-20 overflow-hidden">
+            <div className="relative z-10 py-20 overflow-hidden flex-1">
                 <FloatingMetro type="train" size="md" className="top-20 right-10" delay={0} />
                 <FloatingMetro type="station" size="sm" className="bottom-40 left-10" delay={1.5} />
 
@@ -230,6 +231,10 @@ export default function DashboardPage() {
                     </motion.div>
                 </motion.div>
             </div>
-        </div>
+
+            <div className="relative z-10">
+                <CTA />
+            </div>
+        </main>
     );
 }
