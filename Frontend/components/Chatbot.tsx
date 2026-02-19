@@ -47,31 +47,36 @@ const Chatbot = () => {
         setInput('');
         setIsTyping(true);
 
-        // Mock bot response
-        setTimeout(() => {
+        // Call Backend API
+        try {
+            const response = await fetch('http://localhost:8000/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: input }),
+            });
+
+            const data = await response.json();
+
             const botMessage: Message = {
                 id: (Date.now() + 1).toString(),
-                text: getMockResponse(input),
+                text: data.reply || "I'm sorry, I couldn't process that.",
                 sender: 'bot',
                 timestamp: new Date(),
             };
             setMessages((prev) => [...prev, botMessage]);
+        } catch (error) {
+            console.error('Error fetching chatbot response:', error);
+            const errorMessage: Message = {
+                id: (Date.now() + 1).toString(),
+                text: "Sorry, I'm having trouble connecting to the server. Please try again later.",
+                sender: 'bot',
+                timestamp: new Date(),
+            };
+            setMessages((prev) => [...prev, errorMessage]);
+        } finally {
             setIsTyping(false);
-        }, 1500);
-    };
-
-    const getMockResponse = (query: string) => {
-        const lowerQuery = query.toLowerCase();
-        if (lowerQuery.includes('hello') || lowerQuery.includes('hi')) {
-            return "Hi there! How can I assist you with your commute today?";
-        } else if (lowerQuery.includes('book') || lowerQuery.includes('ride')) {
-            return "You can book a ride from the Track page or your Dashboard. Would you like me to take you there?";
-        } else if (lowerQuery.includes('metro')) {
-            return "Roadचल connects you to various Pune Metro stations like Vanaz, PCMC, and more. Which one are you heading to?";
-        } else if (lowerQuery.includes('fare') || lowerQuery.includes('price')) {
-            return "Our fares are highly competitive, starting at just ₹20 for the last mile connectivity.";
-        } else {
-            return "That's interesting! Tell me more about how Roadचल can make your daily commute better.";
         }
     };
 

@@ -7,6 +7,8 @@ import FloatingMetro from '@/components/FloatingMetro';
 import ParticlesBackground from '@/components/ParticlesBackground';
 import CTA from '@/components/CTA';
 
+import axios from 'axios';
+
 import { metroStations } from '@/lib/mockData';
 import { staggerContainer, slideUp } from '@/lib/animations';
 
@@ -16,15 +18,25 @@ export default function TrackingPage() {
     const [eta, setEta] = useState('12 min');
     const [distance, setDistance] = useState('3.2 km');
     const [driverLocation, setDriverLocation] = useState({ lat: 18.5104, lng: 73.8467 });
+    const [status, setStatus] = useState('En Route');
 
-    // Simulate driver movement
+    // Fetch live tracking data from backend
     useEffect(() => {
-        const interval = setInterval(() => {
-            setDriverLocation(prev => ({
-                lat: prev.lat + 0.001,
-                lng: prev.lng + 0.001
-            }));
-        }, 2000);
+        const fetchTrackingData = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/tracking/map-data');
+                const data = response.data;
+                setEta(data.eta);
+                setDistance(data.distance);
+                setDriverLocation(data.driver_location);
+                setStatus(data.status);
+            } catch (error) {
+                console.error('Error fetching tracking data:', error);
+            }
+        };
+
+        fetchTrackingData();
+        const interval = setInterval(fetchTrackingData, 5000); // Poll every 5 seconds
         return () => clearInterval(interval);
     }, []);
 
@@ -122,7 +134,7 @@ export default function TrackingPage() {
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between">
                                         <span className="text-gray-300">Status:</span>
-                                        <span className="font-bold text-metro-teal">En Route</span>
+                                        <span className="font-bold text-metro-teal">{status}</span>
                                     </div>
                                     <div className="flex items-center justify-between">
                                         <span className="text-gray-300">ETA:</span>

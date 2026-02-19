@@ -15,16 +15,40 @@ export default function LoginPage() {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError('');
 
         if (!formData.email || !formData.password) {
             setError('Please fill in all fields');
             return;
         }
 
-        // Mock login - redirect to dashboard
-        router.push('/dashboard');
+        try {
+            const response = await fetch('http://localhost:8000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.detail || 'Login failed');
+            }
+
+            // Store session/user in localStorage for now (simplified)
+            localStorage.setItem('user', JSON.stringify(data.user));
+            if (data.session) {
+                localStorage.setItem('session', JSON.stringify(data.session));
+            }
+
+            router.push('/dashboard');
+        } catch (err: any) {
+            setError(err.message || 'An error occurred during login');
+        }
     };
 
     return (

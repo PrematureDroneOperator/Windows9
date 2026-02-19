@@ -42,8 +42,10 @@ export default function RegisterPage() {
         return newErrors;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setErrors([]);
+
         const validationErrors = validateForm();
 
         if (validationErrors.length > 0) {
@@ -51,8 +53,33 @@ export default function RegisterPage() {
             return;
         }
 
-        // Mock registration - show success and redirect
-        router.push('/dashboard');
+        try {
+            const response = await fetch('http://localhost:8000/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    username: formData.fullName, // Using fullName as username for now as per controller schema
+                    password: formData.password
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                const detail = data.detail || (data.error && data.error.message) || 'Registration failed';
+                throw new Error(detail);
+            }
+
+            // Successfully registered, usually Supabase sends a confirmation email
+            // or we might already have a session if auto-confirm is on.
+            alert('Registration successful! Please check your email for confirmation (if required).');
+            router.push('/login');
+        } catch (err: any) {
+            setErrors([err.message || 'An error occurred during registration']);
+        }
     };
 
     const handleMobileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
