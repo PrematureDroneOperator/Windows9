@@ -6,18 +6,14 @@ from fastapi import FastAPI, Request, Form
 from fastapi.responses import Response
 from twilio.twiml.messaging_response import MessagingResponse
 
-
-app = FastAPI()
-
+app=FastAPI()
 
 try:
     from .agent import agent_reply
-    from .routes import chatbot_routes, tracking_routes, login_route, signup_route, whatsapp_route
+    from .routes import chatbot_routes, tracking_routes, login_route, signup_route, whatsapp_route, rides_route
 except ImportError:
     from agent import agent_reply
-    from routes import chatbot_routes, tracking_routes, login_route, signup_route, whatsapp_route
-
-app = FastAPI()
+    from routes import chatbot_routes, tracking_routes, login_route, signup_route, whatsapp_route, rides_route
 
 # Add CORS middleware to allow frontend communication
 cors_origins = [
@@ -41,6 +37,7 @@ app.include_router(tracking_routes.router, prefix="/api")
 app.include_router(login_route.router, prefix="/api")
 app.include_router(signup_route.router, prefix="/api")
 app.include_router(whatsapp_route.router, prefix="/api")
+app.include_router(rides_route.router, prefix="/api")
 
 # # Define the request body schema
 # class WhatsAppPayload(BaseModel):

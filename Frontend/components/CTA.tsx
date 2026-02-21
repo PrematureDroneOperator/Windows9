@@ -4,8 +4,11 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import FloatingMetro from './FloatingMetro';
+import { useTranslation } from 'react-i18next';
 
 const CTA = () => {
+    const { t } = useTranslation();
+
     return (
         <section className="py-20 relative overflow-hidden">
             <FloatingMetro type="train" size="lg" className="top-10 left-20" delay={0} />
@@ -18,10 +21,10 @@ const CTA = () => {
                     viewport={{ once: true }}
                 >
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-                        Ready to Transform Your Commute?
+                        {t('cta.title')}
                     </h2>
                     <p className="text-xl text-white mb-8">
-                        Join Roadचल today and experience hassle-free metro connectivity
+                        {t('cta.subtitle')}
                     </p>
                     <Link href="/register">
                         <motion.button
@@ -29,7 +32,7 @@ const CTA = () => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            Get Started Now
+                            {t('cta.button')}
                         </motion.button>
                     </Link>
                 </motion.div>

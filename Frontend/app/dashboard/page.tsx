@@ -11,8 +11,10 @@ import CTA from '@/components/CTA';
 import { rideHistory, stats } from '@/lib/mockData';
 import { FaClock, FaMapMarkerAlt, FaRupeeSign, FaChartLine } from 'react-icons/fa';
 import { staggerContainer, slideUp } from '@/lib/animations';
+import { useTranslation } from 'react-i18next';
 
 export default function DashboardPage() {
+    const { t } = useTranslation();
     return (
         <main className="min-h-screen relative flex flex-col">
             {/* Global Fixed Background */}
@@ -40,10 +42,10 @@ export default function DashboardPage() {
                         className="mb-12"
                     >
                         <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
-                            Welcome back, Priya! 👋
+                            {t('dashboard.welcomeBack')} 👋
                         </h1>
                         <p className="text-xl text-gray-300">
-                            Here's your commute overview
+                            {t('dashboard.overview')}
                         </p>
                     </motion.div>
 
@@ -57,8 +59,8 @@ export default function DashboardPage() {
                                 <Card className="gradient-metro text-white cursor-pointer border-none">
                                     <div className="flex items-center justify-between">
                                         <div>
-                                            <h3 className="text-2xl font-bold mb-2">Start New Ride</h3>
-                                            <p className="text-gray-200">Book your ride to nearest metro</p>
+                                            <h3 className="text-2xl font-bold mb-2">{t('dashboard.startNewRide')}</h3>
+                                            <p className="text-gray-200">{t('dashboard.bookRide')}</p>
                                         </div>
                                         <div className="text-5xl">🚀</div>
                                     </div>
@@ -71,8 +73,8 @@ export default function DashboardPage() {
                                 <Card className="!bg-metro-teal text-white cursor-pointer border-none">
                                     <div className="flex items-center justify-between">
                                         <div>
-                                            <h3 className="text-2xl font-bold mb-2">Track Active Ride</h3>
-                                            <p className="text-gray-100">View live ride status</p>
+                                            <h3 className="text-2xl font-bold mb-2">{t('dashboard.trackActiveRide')}</h3>
+                                            <p className="text-gray-100">{t('dashboard.viewLiveStatus')}</p>
                                         </div>
                                         <div className="text-5xl">📍</div>
                                     </div>
@@ -91,7 +93,7 @@ export default function DashboardPage() {
                                 <FaChartLine className="mx-auto" />
                             </div>
                             <p className="text-3xl font-bold text-white">{stats.totalRides}</p>
-                            <p className="text-gray-300">Total Rides</p>
+                            <p className="text-gray-300">{t('dashboard.totalRides')}</p>
                         </Card>
 
                         <Card glass className="text-center text-white">
@@ -99,7 +101,7 @@ export default function DashboardPage() {
                                 <FaMapMarkerAlt className="mx-auto" />
                             </div>
                             <p className="text-3xl font-bold text-white">{stats.totalDistance}</p>
-                            <p className="text-gray-300">Distance</p>
+                            <p className="text-gray-300">{t('dashboard.distance')}</p>
                         </Card>
 
                         <Card glass className="text-center text-white">
@@ -107,7 +109,7 @@ export default function DashboardPage() {
                                 <FaClock className="mx-auto" />
                             </div>
                             <p className="text-3xl font-bold text-white">{stats.totalTime}</p>
-                            <p className="text-gray-300">Time Saved</p>
+                            <p className="text-gray-300">{t('dashboard.timeSaved')}</p>
                         </Card>
 
                         <Card glass className="text-center text-white">
@@ -115,7 +117,7 @@ export default function DashboardPage() {
                                 <FaRupeeSign className="mx-auto" />
                             </div>
                             <p className="text-3xl font-bold text-white">{stats.moneySaved}</p>
-                            <p className="text-gray-300">Money Saved</p>
+                            <p className="text-gray-300">{t('dashboard.moneySaved')}</p>
                         </Card>
                     </motion.div>
 
@@ -126,7 +128,7 @@ export default function DashboardPage() {
                         {/* Ride History */}
                         <div className="lg:col-span-2">
                             <Card glass className="text-white">
-                                <h3 className="text-2xl font-bold text-white mb-6">Recent Rides</h3>
+                                <h3 className="text-2xl font-bold text-white mb-6">{t('dashboard.recentRides')}</h3>
                                 <div className="space-y-4">
                                     {rideHistory.map((ride) => (
                                         <div
@@ -154,7 +156,7 @@ export default function DashboardPage() {
                                 </div>
                                 <div className="mt-6">
                                     <Button variant="outline" className="w-full border-white/30 text-white hover:bg-white/10">
-                                        View All Rides
+                                        {t('dashboard.viewAllRides')}
                                     </Button>
                                 </div>
                             </Card>
@@ -164,14 +166,14 @@ export default function DashboardPage() {
                         <div className="space-y-6">
                             {/* Upcoming Rides */}
                             <Card glass className="text-white">
-                                <h3 className="text-xl font-bold mb-4 text-metro-teal">Upcoming Rides</h3>
+                                <h3 className="text-xl font-bold mb-4 text-metro-teal">{t('dashboard.upcomingRides')}</h3>
                                 <div className="space-y-3">
                                     <div className="p-3 rounded-lg bg-white/5 border border-white/10">
-                                        <p className="font-semibold mb-1">Tomorrow, 9:00 AM</p>
+                                        <p className="font-semibold mb-1">{t('dashboard.tomorrowRide')}</p>
                                         <p className="text-sm text-gray-300">Kothrud → Vanaz Metro</p>
                                     </div>
                                     <div className="p-3 rounded-lg bg-white/5 border border-white/10">
-                                        <p className="font-semibold mb-1">Mon, 18:30</p>
+                                        <p className="font-semibold mb-1">{t('dashboard.mondayRide')}</p>
                                         <p className="text-sm text-gray-300">Office → Civil Court Metro</p>
                                     </div>
                                 </div>
@@ -179,29 +181,29 @@ export default function DashboardPage() {
 
                             {/* Pass Subscription */}
                             <Card glass className="text-white">
-                                <h3 className="text-xl font-bold mb-4">Monthly Pass</h3>
+                                <h3 className="text-xl font-bold mb-4">{t('dashboard.monthlyPass')}</h3>
                                 <div className="space-y-3">
                                     <div className="flex justify-between">
-                                        <span>Rides Left:</span>
+                                        <span>{t('dashboard.ridesLeft')}</span>
                                         <span className="font-bold">23/30</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>Expires:</span>
+                                        <span>{t('dashboard.expires')}</span>
                                         <span className="font-bold">28 Feb 2026</span>
                                     </div>
                                     <Button variant="secondary" className="w-full mt-4 bg-white text-metro-red hover:bg-gray-100 border-none">
-                                        Renew Pass
+                                        {t('dashboard.renewPass')}
                                     </Button>
                                 </div>
                             </Card>
 
                             {/* Analytics */}
                             <Card glass className="text-white">
-                                <h3 className="text-xl font-bold text-white mb-4">Your Analytics</h3>
+                                <h3 className="text-xl font-bold text-white mb-4">{t('dashboard.analytics')}</h3>
                                 <div className="space-y-4">
                                     <div>
                                         <div className="flex justify-between mb-1">
-                                            <span className="text-sm text-gray-300">Eco Score</span>
+                                            <span className="text-sm text-gray-300">{t('dashboard.ecoScore')}</span>
                                             <span className="text-sm font-bold text-metro-teal">92%</span>
                                         </div>
                                         <div className="w-full bg-gray-700 rounded-full h-2">
@@ -211,7 +213,7 @@ export default function DashboardPage() {
 
                                     <div>
                                         <div className="flex justify-between mb-1">
-                                            <span className="text-sm text-gray-300">On-Time Rate</span>
+                                            <span className="text-sm text-gray-300">{t('dashboard.onTimeRate')}</span>
                                             <span className="text-sm font-bold text-metro-red">88%</span>
                                         </div>
                                         <div className="w-full bg-gray-700 rounded-full h-2">
@@ -222,7 +224,7 @@ export default function DashboardPage() {
                                     <div className="text-center pt-4 border-t border-white/10">
                                         <p className="text-2xl font-bold text-white">🌱</p>
                                         <p className="text-sm text-gray-300 mt-1">
-                                            You've saved 42 kg CO₂ this month!
+                                            {t('dashboard.co2Saved')}
                                         </p>
                                     </div>
                                 </div>

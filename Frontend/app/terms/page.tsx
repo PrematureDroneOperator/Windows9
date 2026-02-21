@@ -7,28 +7,30 @@ import FloatingMetro from '@/components/FloatingMetro';
 import Card from '@/components/Card';
 import CTA from '@/components/CTA';
 import { staggerContainer, fadeIn, slideUp } from '@/lib/animations';
+import { useTranslation } from 'react-i18next';
 
 export default function TermsOfServicePage() {
+    const { t } = useTranslation();
     const sections = [
         {
-            title: "Acceptance of Terms",
-            content: "By accessing and using Roadचल, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services."
+            title: t('terms.sections.acceptance.title'),
+            content: t('terms.sections.acceptance.content')
         },
         {
-            title: "User Responsibilities",
-            content: "Users are responsible for maintaining the confidentiality of their account information and for all activities that occur under their account. You agree to provide accurate and complete information when using our platform."
+            title: t('terms.sections.responsibilities.title'),
+            content: t('terms.sections.responsibilities.content')
         },
         {
-            title: "Service Availability",
-            content: "While we strive to provide 24/7 service, we do not guarantee uninterrupted access to Roadचल. We reserve the right to modify, suspend, or discontinue any part of the service at any time without notice."
+            title: t('terms.sections.availability.title'),
+            content: t('terms.sections.availability.content')
         },
         {
-            title: "Prohibited Conduct",
-            content: "Users agree not to use the service for any unlawful purpose or in any way that could damage, disable, or impair the platform. Harassment of drivers or other users is strictly prohibited."
+            title: t('terms.sections.prohibited.title'),
+            content: t('terms.sections.prohibited.content')
         },
         {
-            title: "Limitation of Liability",
-            content: "Roadचल shall not be liable for any indirect, incidental, special, or consequential damages resulting from the use or inability to use our services."
+            title: t('terms.sections.liability.title'),
+            content: t('terms.sections.liability.content')
         }
     ];
 
@@ -56,13 +58,13 @@ export default function TermsOfServicePage() {
                         variants={fadeIn}
                         className="text-4xl md:text-5xl font-display font-bold text-white mb-4"
                     >
-                        Terms of <span className="text-gradient">Service</span>
+                        {t('terms.titlePrefix')} <span className="text-gradient">{t('terms.titleHighlight')}</span>
                     </motion.h1>
                     <motion.p
                         variants={fadeIn}
                         className="text-xl text-gray-300"
                     >
-                        Last updated: February 18, 2026
+                        {t('terms.lastUpdated')}
                     </motion.p>
                 </motion.div>
 
@@ -90,7 +92,7 @@ export default function TermsOfServicePage() {
 
                     <motion.div variants={fadeIn} className="text-center pt-8">
                         <p className="text-gray-400">
-                            Questions about our Terms? Reach out at{" "}
+                            {t('terms.contactPrefix')}{" "}
                             <a href="mailto:legal@roadchal.com" className="text-metro-teal hover:underline font-bold">
                                 legal@roadchal.com
                             </a>

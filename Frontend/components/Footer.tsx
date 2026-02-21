@@ -4,8 +4,10 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaGithub, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+    const { t } = useTranslation();
     const currentYear = new Date().getFullYear();
     const pathname = usePathname();
     const isHome = ['/', '/landing', '/dashboard', '/tracking', '/login', '/register', '/chatbot', '/contact', '/privacy', '/terms', '/help', '/metro-details'].includes(pathname);
@@ -23,37 +25,37 @@ const Footer = () => {
                             </span>
                         </div>
                         <p className="text-gray-300 text-sm">
-                            Last-mile connectivity from your doorstep to Pune Metro stations
+                            {t('footer.description')}
                         </p>
                     </div>
 
                     {/* Quick Links */}
                     <div>
-                        <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
+                        <h3 className="font-semibold text-lg mb-4">{t('footer.quickLinks')}</h3>
                         <ul className="space-y-2 text-gray-300">
                             <li>
                                 <Link href="/" className="hover:text-metro-teal transition-colors">
-                                    Home
+                                    {t('footer.home')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/landing" className="hover:text-metro-teal transition-colors">
-                                    About Us
+                                    {t('footer.aboutUs')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/metro-details" className="hover:text-metro-teal transition-colors">
-                                    Metro Details
+                                    {t('footer.metroDetails')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/tracking" className="hover:text-metro-teal transition-colors">
-                                    Track Ride
+                                    {t('footer.trackRide')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/dashboard" className="hover:text-metro-teal transition-colors">
-                                    Dashboard
+                                    {t('footer.dashboard')}
                                 </Link>
                             </li>
                         </ul>
@@ -61,26 +63,26 @@ const Footer = () => {
 
                     {/* Support */}
                     <div>
-                        <h3 className="font-semibold text-lg mb-4">Support</h3>
+                        <h3 className="font-semibold text-lg mb-4">{t('footer.support')}</h3>
                         <ul className="space-y-2 text-gray-300">
                             <li>
                                 <Link href="/help" className="hover:text-metro-teal transition-colors">
-                                    Help Center
+                                    {t('footer.helpCenter')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/contact" className="hover:text-metro-teal transition-colors">
-                                    Contact Us
+                                    {t('footer.contactUs')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/privacy" className="hover:text-metro-teal transition-colors">
-                                    Privacy Policy
+                                    {t('footer.privacyPolicy')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/terms" className="hover:text-metro-teal transition-colors">
-                                    Terms of Service
+                                    {t('footer.termsOfService')}
                                 </Link>
                             </li>
                         </ul>
@@ -88,7 +90,7 @@ const Footer = () => {
 
                     {/* Social */}
                     <div>
-                        <h3 className="font-semibold text-lg mb-4">Connect With Us</h3>
+                        <h3 className="font-semibold text-lg mb-4">{t('footer.connectWithUs')}</h3>
                         <div className="flex space-x-4">
                             <a href="#" className="text-2xl hover:text-metro-teal transition-colors">
                                 <FaTwitter />
@@ -107,7 +109,9 @@ const Footer = () => {
                 </div>
 
                 <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
-                    <p>&copy; {currentYear} Roadचल. All rights reserved. | Powered by Pune Metro</p>
+                    <p>
+                        &copy; {currentYear} Roadचल. {t('footer.rightsReserved')} | {t('footer.poweredByPuneMetro')}
+                    </p>
                 </div>
             </div>
         </footer>

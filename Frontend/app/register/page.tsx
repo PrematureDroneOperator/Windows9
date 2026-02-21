@@ -8,8 +8,10 @@ import FloatingMetro from '@/components/FloatingMetro';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
 import ParticlesBackground from '@/components/ParticlesBackground';
+import { useTranslation } from 'react-i18next';
 
 export default function RegisterPage() {
+    const { t } = useTranslation();
     const router = useRouter();
     const [formData, setFormData] = useState({
         fullName: '',
@@ -24,19 +26,19 @@ export default function RegisterPage() {
     const validateForm = () => {
         const newErrors: string[] = [];
 
-        if (!formData.fullName) newErrors.push('Full name is required');
-        if (!formData.email) newErrors.push('Email is required');
+        if (!formData.fullName) newErrors.push(t('register.errors.fullNameRequired'));
+        if (!formData.email) newErrors.push(t('register.errors.emailRequired'));
         if (!formData.mobile || !/^\d{10}$/.test(formData.mobile)) {
-            newErrors.push('Valid 10-digit mobile number required');
+            newErrors.push(t('register.errors.mobileRequired'));
         }
         if (!formData.password || formData.password.length < 6) {
-            newErrors.push('Password must be at least 6 characters');
+            newErrors.push(t('register.errors.passwordLength'));
         }
         if (formData.password !== formData.confirmPassword) {
-            newErrors.push('Passwords do not match');
+            newErrors.push(t('register.errors.passwordMismatch'));
         }
         if (!formData.acceptTerms) {
-            newErrors.push('Please accept terms and conditions');
+            newErrors.push(t('register.errors.acceptTerms'));
         }
 
         return newErrors;
@@ -69,16 +71,17 @@ export default function RegisterPage() {
             const data = await response.json();
 
             if (!response.ok) {
-                const detail = data.detail || (data.error && data.error.message) || 'Registration failed';
+                const fallback = t('register.errors.registrationFailed');
+                const detail = data.detail || (data.error && data.error.message) || fallback;
                 throw new Error(detail);
             }
 
             // Successfully registered, usually Supabase sends a confirmation email
             // or we might already have a session if auto-confirm is on.
-            alert('Registration successful! Please check your email for confirmation (if required).');
+            alert(t('register.successMessage'));
             router.push('/login');
         } catch (err: any) {
-            setErrors([err.message || 'An error occurred during registration']);
+            setErrors([err.message || t('register.errors.general')]);
         }
     };
 
@@ -111,8 +114,8 @@ export default function RegisterPage() {
                     >
                         {/* Title */}
                         <div className="text-center mb-8">
-                            <h1 className="text-4xl font-display font-bold text-white mb-2">Join Roadचल</h1>
-                            <p className="text-gray-300">Create your account and start your journey</p>
+                            <h1 className="text-4xl font-display font-bold text-white mb-2">{t('register.title')}</h1>
+                            <p className="text-gray-300">{t('register.subtitle')}</p>
                         </div>
 
                         {/* Registration Card */}
@@ -120,43 +123,43 @@ export default function RegisterPage() {
                             <form onSubmit={handleSubmit} className="space-y-5">
                                 {/* Full Name */}
                                 <div>
-                                    <label className="block text-white font-medium mb-2">Full Name</label>
+                                    <label className="block text-white font-medium mb-2">{t('register.fullName')}</label>
                                     <input
                                         type="text"
                                         value={formData.fullName}
                                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                                         className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-metro-teal transition-all"
-                                        placeholder="John Doe"
+                                        placeholder={t('register.fullNamePlaceholder')}
                                     />
                                 </div>
 
                                 {/* Email */}
                                 <div>
-                                    <label className="block text-white font-medium mb-2">Email</label>
+                                    <label className="block text-white font-medium mb-2">{t('register.email')}</label>
                                     <input
                                         type="email"
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                         className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-metro-teal transition-all"
-                                        placeholder="your.email@example.com"
+                                        placeholder={t('register.emailPlaceholder')}
                                     />
                                 </div>
 
                                 {/* Mobile */}
                                 <div>
-                                    <label className="block text-white font-medium mb-2">Mobile Number</label>
+                                    <label className="block text-white font-medium mb-2">{t('register.mobileNumber')}</label>
                                     <input
                                         type="tel"
                                         value={formData.mobile}
                                         onChange={handleMobileChange}
                                         className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-metro-teal transition-all"
-                                        placeholder="9876543210"
+                                        placeholder={t('register.mobilePlaceholder')}
                                     />
                                 </div>
 
                                 {/* Password */}
                                 <div>
-                                    <label className="block text-white font-medium mb-2">Password</label>
+                                    <label className="block text-white font-medium mb-2">{t('register.password')}</label>
                                     <input
                                         type="password"
                                         value={formData.password}
@@ -168,7 +171,7 @@ export default function RegisterPage() {
 
                                 {/* Confirm Password */}
                                 <div>
-                                    <label className="block text-white font-medium mb-2">Confirm Password</label>
+                                    <label className="block text-white font-medium mb-2">{t('register.confirmPassword')}</label>
                                     <input
                                         type="password"
                                         value={formData.confirmPassword}
@@ -187,9 +190,9 @@ export default function RegisterPage() {
                                         className="mt-1 w-4 h-4 rounded border-white/20 bg-white/10"
                                     />
                                     <label className="ml-2 text-sm text-gray-300">
-                                        I accept the{' '}
+                                        {t('register.acceptPrefix')}{' '}
                                         <a href="#" className="text-metro-teal hover:underline">
-                                            Terms and Conditions
+                                            {t('register.termsAndConditions')}
                                         </a>
                                     </label>
                                 </div>
@@ -211,15 +214,15 @@ export default function RegisterPage() {
 
                                 {/* Submit */}
                                 <Button type="submit" variant="primary" className="w-full">
-                                    Create Account
+                                    {t('register.createAccount')}
                                 </Button>
                             </form>
 
                             {/* Login Link */}
                             <div className="mt-6 text-center text-gray-300">
-                                Already have an account?{' '}
+                                {t('register.alreadyHaveAccount')}{' '}
                                 <Link href="/login" className="text-metro-teal hover:underline font-semibold">
-                                    Sign In
+                                    {t('register.signIn')}
                                 </Link>
                             </div>
                         </Card>

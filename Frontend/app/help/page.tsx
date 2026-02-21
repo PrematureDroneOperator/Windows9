@@ -8,33 +8,35 @@ import Card from '@/components/Card';
 import CTA from '@/components/CTA';
 import { staggerContainer, fadeIn, slideUp } from '@/lib/animations';
 import { FaSearch, FaChevronDown, FaTicketAlt, FaWallet, FaShieldAlt, FaQuestionCircle } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 export default function HelpCenterPage() {
+    const { t } = useTranslation();
     const [activeSection, setActiveSection] = useState<number | null>(null);
 
     const categories = [
-        { icon: <FaTicketAlt />, title: "Booking Rides", desc: "Learn how to book and manage your metro connections." },
-        { icon: <FaWallet />, title: "Payments & Pricing", desc: "Information about fares, passes, and payment methods." },
-        { icon: <FaShieldAlt />, title: "Safety & Privacy", desc: "Our commitment to your safety and data protection." },
-        { icon: <FaQuestionCircle />, title: "General Info", desc: "Everything else you need to know about Roadचल." }
+        { icon: <FaTicketAlt />, title: t('help.categories.booking.title'), desc: t('help.categories.booking.desc') },
+        { icon: <FaWallet />, title: t('help.categories.payments.title'), desc: t('help.categories.payments.desc') },
+        { icon: <FaShieldAlt />, title: t('help.categories.safety.title'), desc: t('help.categories.safety.desc') },
+        { icon: <FaQuestionCircle />, title: t('help.categories.general.title'), desc: t('help.categories.general.desc') }
     ];
 
     const faqs = [
         {
-            question: "How do I book a ride to the nearest metro station?",
-            answer: "Simply open the Roadचल app, enter your destination metro station, and we'll match you with the nearest available driver to pick you up from your doorstep."
+            question: t('help.faqs.q1.question'),
+            answer: t('help.faqs.q1.answer')
         },
         {
-            question: "What are the operating hours?",
-            answer: "Roadचल operates in sync with the Pune Metro timings, typically from 6:00 AM to 10:00 PM, ensuring you always have a last-mile connection for your metro journey."
+            question: t('help.faqs.q2.question'),
+            answer: t('help.faqs.q2.answer')
         },
         {
-            question: "How are the fares calculated?",
-            answer: "Fares are calculated based on the distance between your pickup location and the metro station. We offer transparent, flat-rate pricing to make your commute predictable."
+            question: t('help.faqs.q3.question'),
+            answer: t('help.faqs.q3.answer')
         },
         {
-            question: "Can I use my Pune Metro pass with Roadचल?",
-            answer: "We are currently working on a unified ticketing system. For now, Roadचल rides are paid separately, but stay tuned for our 'One City, One Pass' integration!"
+            question: t('help.faqs.q4.question'),
+            answer: t('help.faqs.q4.answer')
         }
     ];
 
@@ -62,7 +64,7 @@ export default function HelpCenterPage() {
                         variants={fadeIn}
                         className="text-4xl md:text-6xl font-display font-bold text-white mb-6"
                     >
-                        How can we <span className="text-gradient">help?</span>
+                        {t('help.titlePrefix')} <span className="text-gradient">{t('help.titleHighlight')}</span>
                     </motion.h1>
                     <motion.div
                         variants={fadeIn}
@@ -70,7 +72,7 @@ export default function HelpCenterPage() {
                     >
                         <input
                             type="text"
-                            placeholder="Search for articles, guides..."
+                            placeholder={t('help.searchPlaceholder')}
                             className="w-full bg-white/10 border border-white/20 rounded-2xl py-4 px-6 pl-14 text-white placeholder-gray-400 focus:outline-none focus:border-metro-teal transition-all backdrop-blur-md"
                         />
                         <FaSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
@@ -105,7 +107,7 @@ export default function HelpCenterPage() {
                         variants={fadeIn}
                         className="text-3xl font-bold text-white mb-8 text-center"
                     >
-                        Frequently Asked Questions
+                        {t('help.faqTitle')}
                     </motion.h2>
                     <div className="space-y-4">
                         {faqs.map((faq, index) => (
