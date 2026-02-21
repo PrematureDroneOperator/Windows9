@@ -1,0 +1,8 @@
+1)user website
+2)whatsAppchatbot
+//backend
+1)fastapi (booking process(abdul),booking system(viggu),postgres+postgis(done),supabase(done),metaapiforbusinnes(done))
+2)frontend(done+nextjs+i18next)
+3)LLM's(ollama+model(tinyllamma))
+
+
