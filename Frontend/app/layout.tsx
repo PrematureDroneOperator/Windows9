@@ -15,6 +15,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
     title: "Roadचल - Last Mile Connectivity",
     description: "Effortless rides from your doorstep to nearest Pune Metro station",
+    icons: {
+        icon: "/icon.svg",
+    },
 };
 
 export default function RootLayout({

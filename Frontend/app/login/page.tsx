@@ -10,6 +10,7 @@ import Button from '@/components/Button';
 import { FaGoogle, FaApple } from 'react-icons/fa';
 import ParticlesBackground from '@/components/ParticlesBackground';
 import { useTranslation } from 'react-i18next';
+import { supabase } from '@/lib/supabaseClient';
 
 export default function LoginPage() {
     const { t } = useTranslation();
@@ -45,6 +46,9 @@ export default function LoginPage() {
             localStorage.setItem('user', JSON.stringify(data.user));
             if (data.session) {
                 localStorage.setItem('session', JSON.stringify(data.session));
+                if (supabase) {
+                    await supabase.auth.setSession(data.session);
+                }
             }
 
             router.push('/dashboard');

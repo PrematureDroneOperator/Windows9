@@ -3,12 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX, FiUser } from 'react-icons/fi';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '@/context/AuthContext';
 
 const Navbar = () => {
     const { t } = useTranslation();
+    const { user } = useAuth();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -20,16 +22,21 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = [
-        { href: '/', label: t('nav.home') },
-        { href: '/landing', label: t('nav.about') },
-        { href: '/metro-details', label: t('nav.metro') },
-        { href: '/tracking', label: t('nav.track') },
-        { href: '/chatbot', label: t('nav.chat') },
-        { href: '/contact', label: t('nav.contact') },
-        { href: '/dashboard', label: t('nav.dashboard') },
-        { href: '/login', label: t('nav.login') }
-    ];
+    const navLinks = user
+        ? [
+            { href: '/', label: t('nav.home') },
+            { href: '/landing', label: t('nav.about') },
+            { href: '/metro-details', label: t('nav.metro') },
+            { href: '/tracking', label: t('nav.track') },
+            { href: '/chatbot', label: t('nav.chat') },
+            { href: '/contact', label: t('nav.contact') },
+            { href: '/dashboard', label: t('nav.dashboard') }
+        ]
+        : [
+            { href: '/', label: t('nav.home') },
+            { href: '/landing', label: t('nav.about') },
+            { href: '/login', label: t('nav.login') }
+        ];
 
     return (
         <motion.nav
@@ -75,15 +82,17 @@ const Navbar = () => {
                         ))}
                         <div className="flex items-center space-x-4">
                             <LanguageSwitcher />
-                            <Link href="/register">
-                                <motion.button
-                                    className="btn-secondary"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    {t('nav.getStarted')}
-                                </motion.button>
-                            </Link>
+                            {user && (
+                                <Link href="/account">
+                                    <motion.div
+                                        className="w-10 h-10 rounded-full bg-metro-teal/20 border border-metro-teal/50 flex items-center justify-center text-metro-teal cursor-pointer hover:bg-metro-teal/30 transition-all shadow-[0_0_15px_rgba(6,214,160,0.3)]"
+                                        whileHover={{ scale: 1.1, rotate: 5 }}
+                                        whileTap={{ scale: 0.9 }}
+                                    >
+                                        <FiUser size={20} />
+                                    </motion.div>
+                                </Link>
+                            )}
                         </div>
                     </div>
 
@@ -118,14 +127,17 @@ const Navbar = () => {
                                 </div>
                             </Link>
                         ))}
-                        <Link href="/register">
-                            <button
-                                className="btn-secondary w-full mt-2"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                {t('nav.getStarted')}
-                            </button>
-                        </Link>
+                        {user && (
+                            <Link href="/account">
+                                <button
+                                    className="flex items-center justify-center space-x-2 w-full mt-2 py-3 px-4 rounded-xl bg-metro-teal/20 border border-metro-teal/40 text-metro-teal font-medium hover:bg-metro-teal/30 transition-all"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    <FiUser />
+                                    <span>{t('nav.account') || 'Account'}</span>
+                                </button>
+                            </Link>
+                        )}
                     </motion.div>
                 )}
             </div>
