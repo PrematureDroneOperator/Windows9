@@ -56,7 +56,7 @@ export default function RegisterPage() {
         }
 
         try {
-            const response = await fetch('http://localhost:8000/api/signup', {
+            const response = await fetch('/api/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,8 +80,8 @@ export default function RegisterPage() {
             // or we might already have a session if auto-confirm is on.
             alert(t('register.successMessage'));
             router.push('/login');
-        } catch (err: any) {
-            setErrors([err.message || t('register.errors.general')]);
+        } catch (err: unknown) {
+            setErrors([err instanceof Error ? err.message : t('register.errors.general')]);
         }
     };
 

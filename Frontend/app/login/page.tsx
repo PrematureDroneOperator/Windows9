@@ -27,7 +27,7 @@ export default function LoginPage() {
         }
 
         try {
-            const response = await fetch('http://localhost:8000/api/login', {
+            const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,8 +48,8 @@ export default function LoginPage() {
             }
 
             router.push('/dashboard');
-        } catch (err: any) {
-            setError(err.message || t('login.errors.general'));
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : t('login.errors.general'));
         }
     };
 

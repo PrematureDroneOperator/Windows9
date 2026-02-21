@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import ParticlesBackground from '@/components/ParticlesBackground';
 import FloatingMetro from '@/components/FloatingMetro';
 import Card from '@/components/Card';
-import Button from '@/components/Button';
 import CTA from '@/components/CTA';
 import { staggerContainer, fadeIn, slideUp } from '@/lib/animations';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
@@ -73,7 +72,7 @@ export default function ContactPage() {
                     </motion.p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                <div className="stagger-grid grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
                     {/* Contact Info Cards */}
                     <motion.div
                         variants={staggerContainer}
@@ -124,7 +123,7 @@ export default function ContactPage() {
                                 </motion.div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-6">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="stagger-grid grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
                                             <label className="text-sm font-medium text-gray-300 ml-1">{t('contact.yourName')}</label>
                                             <input
