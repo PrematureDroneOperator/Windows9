@@ -1,6 +1,10 @@
 # agent.py
-from memory import get_session
-from tools import find_route, book_ride
+try:
+    from .memory import get_session
+    from .tools import find_route, book_ride
+except ImportError:
+    from memory import get_session
+    from tools import find_route, book_ride
 
 def agent_reply(user_id, message):
 
@@ -39,6 +43,8 @@ def agent_reply(user_id, message):
 
     # ---- STEP 3: booking ----
     if session["state"] == "choose_ride":
+        if "1" not in msg and "2" not in msg:
+            return "Please choose a ride by replying with 1 for Auto or 2 for Bike Taxi."
 
         ride = "Auto" if "1" in msg else "Bike"
 

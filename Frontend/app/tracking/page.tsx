@@ -5,30 +5,45 @@ import { motion } from 'framer-motion';
 import Card from '@/components/Card';
 import FloatingMetro from '@/components/FloatingMetro';
 import ParticlesBackground from '@/components/ParticlesBackground';
+import CTA from '@/components/CTA';
+
+import axios from 'axios';
 
 import { metroStations } from '@/lib/mockData';
 import { staggerContainer, slideUp } from '@/lib/animations';
+import { useTranslation } from 'react-i18next';
 
 export default function TrackingPage() {
+    const { t } = useTranslation();
     const [currentLocation, setCurrentLocation] = useState({ lat: 18.5204, lng: 73.8567 });
     const [destination, setDestination] = useState(metroStations[0]);
     const [eta, setEta] = useState('12 min');
     const [distance, setDistance] = useState('3.2 km');
     const [driverLocation, setDriverLocation] = useState({ lat: 18.5104, lng: 73.8467 });
+    const [status, setStatus] = useState('En Route');
 
-    // Simulate driver movement
+    // Fetch live tracking data from backend
     useEffect(() => {
-        const interval = setInterval(() => {
-            setDriverLocation(prev => ({
-                lat: prev.lat + 0.001,
-                lng: prev.lng + 0.001
-            }));
-        }, 2000);
+        const fetchTrackingData = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/tracking/map-data');
+                const data = response.data;
+                setEta(data.eta);
+                setDistance(data.distance);
+                setDriverLocation(data.driver_location);
+                setStatus(data.status);
+            } catch (error) {
+                console.error('Error fetching tracking data:', error);
+            }
+        };
+
+        fetchTrackingData();
+        const interval = setInterval(fetchTrackingData, 5000); // Poll every 5 seconds
         return () => clearInterval(interval);
     }, []);
 
     return (
-        <div className="min-h-screen relative">
+        <main className="min-h-screen relative flex flex-col">
             {/* Global Fixed Background */}
             <div className="fixed inset-0 z-0 bg-gradient-to-br from-metro-dark via-gray-800 to-metro-dark">
                 <ParticlesBackground id="particles-tracking" />
@@ -38,7 +53,7 @@ export default function TrackingPage() {
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 py-20 overflow-hidden">
+            <div className="relative z-10 py-20 overflow-hidden flex-1">
                 <FloatingMetro type="train" size="sm" className="top-20 right-10" delay={0} />
 
                 <motion.div
@@ -52,10 +67,10 @@ export default function TrackingPage() {
                         className="mb-8"
                     >
                         <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-                            Track Your Ride
+                            {t('tracking.title')}
                         </h1>
                         <p className="text-xl text-gray-300">
-                            Real-time tracking from pickup to metro station
+                            {t('tracking.subtitle')}
                         </p>
                     </motion.div>
 
@@ -70,8 +85,8 @@ export default function TrackingPage() {
                                 <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
                                     <div className="text-center opacity-50">
                                         <div className="text-8xl mb-4 animate-pulse-glow text-metro-teal">🗺️</div>
-                                        <p className="text-2xl font-bold text-white mb-2">Interactive Map</p>
-                                        <p className="text-gray-400">Live tracking visualization</p>
+                                        <p className="text-2xl font-bold text-white mb-2">{t('tracking.interactiveMap')}</p>
+                                        <p className="text-gray-400">{t('tracking.liveTrackingVisualization')}</p>
                                     </div>
                                 </div>
 
@@ -117,18 +132,18 @@ export default function TrackingPage() {
                         <div className="space-y-6">
                             {/* Trip Status */}
                             <Card glass className="bg-metro-dark/80 backdrop-blur-md text-white border-metro-teal/30 shadow-lg shadow-metro-teal/10">
-                                <h3 className="text-xl font-bold mb-4 text-metro-teal">Trip Status</h3>
+                                <h3 className="text-xl font-bold mb-4 text-metro-teal">{t('tracking.tripStatus')}</h3>
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between">
-                                        <span className="text-gray-300">Status:</span>
-                                        <span className="font-bold text-metro-teal">En Route</span>
+                                        <span className="text-gray-300">{t('tracking.statusLabel')}</span>
+                                        <span className="font-bold text-metro-teal">{status}</span>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <span className="text-gray-300">ETA:</span>
+                                        <span className="text-gray-300">{t('tracking.etaLabel')}</span>
                                         <span className="font-bold">{eta}</span>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <span className="text-gray-300">Distance:</span>
+                                        <span className="text-gray-300">{t('tracking.distanceLabel')}</span>
                                         <span className="font-bold">{distance}</span>
                                     </div>
                                 </div>
@@ -136,12 +151,12 @@ export default function TrackingPage() {
 
                             {/* Route Details */}
                             <Card glass className="text-white">
-                                <h3 className="text-xl font-bold text-white mb-4">Route Details</h3>
+                                <h3 className="text-xl font-bold text-white mb-4">{t('tracking.routeDetails')}</h3>
                                 <div className="space-y-4">
                                     <div className="flex items-start">
                                         <div className="text-2xl mr-3">🏠</div>
                                         <div>
-                                            <p className="font-semibold text-white">Pickup</p>
+                                            <p className="font-semibold text-white">{t('tracking.pickup')}</p>
                                             <p className="text-sm text-gray-300">Kothrud, Pune</p>
                                         </div>
                                     </div>
@@ -151,8 +166,10 @@ export default function TrackingPage() {
                                     <div className="flex items-start">
                                         <div className="text-2xl mr-3">🚇</div>
                                         <div>
-                                            <p className="font-semibold text-white">Destination</p>
-                                            <p className="text-sm text-gray-300">{destination.name} Metro Station</p>
+                                            <p className="font-semibold text-white">{t('tracking.destination')}</p>
+                                            <p className="text-sm text-gray-300">
+                                                {destination.name} {t('tracking.metroStationSuffix')}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -160,23 +177,23 @@ export default function TrackingPage() {
 
                             {/* Driver Info */}
                             <Card glass className="text-white">
-                                <h3 className="text-xl font-bold mb-4">Driver Details</h3>
+                                <h3 className="text-xl font-bold mb-4">{t('tracking.driverDetails')}</h3>
                                 <div className="flex items-center mb-4">
                                     <div className="text-5xl mr-4">👨‍✈️</div>
                                     <div>
                                         <p className="font-bold text-lg">Rajesh Kumar</p>
-                                        <p className="text-sm">⭐ 4.9 Rating</p>
+                                        <p className="text-sm">⭐ 4.9 {t('tracking.rating')}</p>
                                     </div>
                                 </div>
                                 <div className="space-y-2 text-sm">
-                                    <p>Vehicle: Honda City (MH 12 AB 1234)</p>
-                                    <p>Experience: 5 years</p>
+                                    <p>{t('tracking.vehicle')}: Honda City (MH 12 AB 1234)</p>
+                                    <p>{t('tracking.experience')}: 5 {t('tracking.years')}</p>
                                 </div>
                             </Card>
 
                             {/* Nearby Stations */}
                             <Card glass className="text-white">
-                                <h3 className="text-xl font-bold text-white mb-4">Nearby Stations</h3>
+                                <h3 className="text-xl font-bold text-white mb-4">{t('tracking.nearbyStations')}</h3>
                                 <div className="space-y-2">
                                     {metroStations.slice(0, 5).map((station) => (
                                         <div
@@ -187,7 +204,7 @@ export default function TrackingPage() {
                                                 <span className="text-xl mr-2">🚇</span>
                                                 <span className="text-sm font-medium">{station.name}</span>
                                             </div>
-                                            <span className="text-xs text-gray-400">{station.line} Line</span>
+                                            <span className="text-xs text-gray-400">{station.line} {t('tracking.line')}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -196,6 +213,10 @@ export default function TrackingPage() {
                     </motion.div>
                 </motion.div>
             </div>
-        </div>
+
+            <div className="relative z-10">
+                <CTA />
+            </div>
+        </main>
     );
 }
