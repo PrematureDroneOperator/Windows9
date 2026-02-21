@@ -7,7 +7,7 @@ import FloatingMetro from '@/components/FloatingMetro';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
 import { features } from '@/lib/mockData';
-import { fadeIn, slideUp } from '@/lib/animations';
+import { fadeIn } from '@/lib/animations';
 import ParticlesBackground from '@/components/ParticlesBackground';
 import CTA from '@/components/CTA';
 import { useTranslation } from 'react-i18next';
@@ -74,7 +74,7 @@ export default function LandingPage() {
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="stagger-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {translatedFeatures.map((feature) => (
                                 <Card key={feature.id} glass className="text-center">
                                     <div className="text-5xl mb-4">{feature.icon}</div>
@@ -93,7 +93,7 @@ export default function LandingPage() {
                     <FloatingMetro type="train" size="lg" className="top-10 right-10" delay={0} />
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div className="stagger-grid grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <motion.div
                                 initial={{ opacity: 0, x: -50 }}
                                 whileInView={{ opacity: 1, x: 0 }}
@@ -148,7 +148,7 @@ export default function LandingPage() {
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="stagger-grid grid grid-cols-1 md:grid-cols-3 gap-8">
                             {[
                                 { emoji: '📱', title: t('landing.modern.cards.liveTracking.title'), desc: t('landing.modern.cards.liveTracking.desc') },
                                 { emoji: '💳', title: t('landing.modern.cards.easyPayments.title'), desc: t('landing.modern.cards.easyPayments.desc') },

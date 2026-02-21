@@ -51,7 +51,7 @@ export default function DashboardPage() {
 
                     {/* Quick Actions */}
                     <motion.div
-                        className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
+                        className="stagger-grid grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
                         variants={slideUp}
                     >
                         <Link href="/tracking">
@@ -85,7 +85,7 @@ export default function DashboardPage() {
 
                     {/* Stats Grid */}
                     <motion.div
-                        className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
+                        className="stagger-grid grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
                         variants={slideUp}
                     >
                         <Card glass className="text-center text-white">
@@ -122,7 +122,7 @@ export default function DashboardPage() {
                     </motion.div>
 
                     <motion.div
-                        className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+                        className="stagger-grid grid grid-cols-1 lg:grid-cols-3 gap-8"
                         variants={slideUp}
                     >
                         {/* Ride History */}

@@ -71,7 +71,7 @@ export default function MetroDetailsPage() {
                 </motion.div>
 
                 {/* Info Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div className="stagger-grid grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                     {infoCards.map((card, index) => (
                         <motion.div key={index} variants={slideUp}>
                             <Card glass className="p-8 text-center border-white/10 hover:scale-105 transition-transform">
@@ -100,7 +100,7 @@ export default function MetroDetailsPage() {
                         </div>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div className="stagger-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {purpleLineStations.map((station) => (
                             <motion.div key={station.id} variants={slideUp}>
                                 <Card glass className="p-6 border-white/5 hover:border-metro-teal/50 transition-colors group">

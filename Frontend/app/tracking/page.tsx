@@ -15,8 +15,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function TrackingPage() {
     const { t } = useTranslation();
-    const [currentLocation, setCurrentLocation] = useState({ lat: 18.5204, lng: 73.8567 });
-    const [destination, setDestination] = useState(metroStations[0]);
+    const [destination] = useState(metroStations[0]);
     const [eta, setEta] = useState('12 min');
     const [distance, setDistance] = useState('3.2 km');
     const [driverLocation, setDriverLocation] = useState({ lat: 18.5104, lng: 73.8467 });
@@ -26,7 +25,7 @@ export default function TrackingPage() {
     useEffect(() => {
         const fetchTrackingData = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/tracking/map-data');
+                const response = await axios.get('/api/tracking/map-data');
                 const data = response.data;
                 setEta(data.eta);
                 setDistance(data.distance);
