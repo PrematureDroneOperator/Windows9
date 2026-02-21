@@ -30,11 +30,10 @@ const FloatingMetro: React.FC<FloatingMetroProps> = ({
 
     const floatVariants = {
         animate: {
-            y: [0, -30, 0],
-            x: [0, 15, -15, 0],
-            rotate: [0, 5, -5, 0],
+            y: [0, -20, 0],
+            rotate: [0, 2, -2, 0],
             transition: {
-                duration: 8 + delay,
+                duration: 6 + delay,
                 repeat: Infinity,
                 ease: 'easeInOut',
                 delay: delay * 0.5
@@ -44,7 +43,7 @@ const FloatingMetro: React.FC<FloatingMetroProps> = ({
 
     return (
         <motion.div
-            className={`absolute ${sizeClasses[size]} ${className} opacity-20 select-none pointer-events-none`}
+            className={`absolute ${sizeClasses[size]} ${className} opacity-30 select-none pointer-events-none will-change-transform`}
             variants={floatVariants}
             animate="animate"
         >

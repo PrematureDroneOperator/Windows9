@@ -16,7 +16,7 @@ const ParticlesBackground = ({ id = "tsparticles", color = "#bf00ff" }: Particle
     }, []);
 
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 z-0 pointer-events-none" style={{ filter: `drop-shadow(0 0 10px ${color}44)` }}>
             <Particles
                 id={id}
                 init={particlesInit}
@@ -28,7 +28,7 @@ const ParticlesBackground = ({ id = "tsparticles", color = "#bf00ff" }: Particle
                             value: "transparent",
                         },
                     },
-                    fpsLimit: 120,
+                    fpsLimit: 60,
                     interactivity: {
                         events: {
                             onClick: {
@@ -61,11 +61,6 @@ const ParticlesBackground = ({ id = "tsparticles", color = "#bf00ff" }: Particle
                             enable: true,
                             opacity: 0.3,
                             width: 1,
-                            shadow: {
-                                enable: true,
-                                color: color,
-                                blur: 5
-                            }
                         },
                         move: {
                             direction: "none",
@@ -82,7 +77,7 @@ const ParticlesBackground = ({ id = "tsparticles", color = "#bf00ff" }: Particle
                                 enable: true,
                                 area: 800,
                             },
-                            value: 80, // More particles for better effect
+                            value: 40, // Optimized for performance
                         },
                         opacity: {
                             value: 0.5,

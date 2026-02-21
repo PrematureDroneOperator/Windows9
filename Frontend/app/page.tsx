@@ -60,19 +60,9 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
         >
-            <div className="fixed inset-0 z-0 bg-gradient-to-br from-metro-dark via-gray-800 to-metro-dark">
+            <div className="fixed inset-0 z-0 bg-gradient-to-br from-metro-dark via-gray-800 to-metro-dark overflow-hidden">
                 <ParticlesBackground id="particles-global" />
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_18%,rgba(6,214,160,0.10),transparent_35%),radial-gradient(circle_at_85%_80%,rgba(230,57,70,0.11),transparent_36%)]" />
-                <motion.div
-                    className="absolute top-0 left-0 w-96 h-96 bg-metro-red opacity-15 rounded-full blur-3xl will-change-transform"
-                    animate={{ y: [0, 10, 0], x: [0, 8, 0] }}
-                    transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
-                />
-                <motion.div
-                    className="absolute bottom-0 right-0 w-96 h-96 bg-metro-teal opacity-15 rounded-full blur-3xl will-change-transform"
-                    animate={{ y: [0, -10, 0], x: [0, -8, 0] }}
-                    transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
-                />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_18%,rgba(6,214,160,0.12),transparent_40%),radial-gradient(circle_at_85%_80%,rgba(230,57,70,0.12),transparent_40%)]" />
             </div>
 
             <div className="relative z-10">
@@ -89,8 +79,8 @@ export default function Home() {
                     <FloatingMetro type="icon" size="sm" className="top-1/3 right-1/3" delay={1.5} />
                     <FloatingMetro type="station" size="sm" className="bottom-20 right-10" delay={0.5} />
 
-                    <div className="absolute top-0 left-0 w-96 h-96 bg-metro-red opacity-20 rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-0 right-0 w-96 h-96 bg-metro-teal opacity-20 rounded-full blur-3xl"></div>
+                    <div className="absolute top-0 left-0 w-96 h-96 bg-metro-red opacity-10 rounded-full blur-2xl"></div>
+                    <div className="absolute bottom-0 right-0 w-96 h-96 bg-metro-teal opacity-10 rounded-full blur-2xl"></div>
 
                     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                         <motion.div variants={staggerContainer} initial="hidden" animate="visible">
@@ -130,14 +120,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section className="py-20 relative overflow-hidden">
-                    <motion.div
-                        aria-hidden
-                        className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(circle_at_18%_32%,rgba(6,214,160,0.12),transparent_40%),radial-gradient(circle_at_88%_70%,rgba(230,57,70,0.10),transparent_45%)] blur-2xl will-change-transform"
-                        animate={{ y: [0, 5, 0] }}
-                        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
-                    />
-                    <FloatingMetro type="train" size="md" className="top-10 right-5" delay={0} />
+                <section className="py-20 relative overflow-hidden px-4 sm:px-6 lg:px-8">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div {...fadeUpOnScroll} className="text-center mb-16">
                             <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">{t('howItWorks.title')}</h2>
@@ -169,13 +152,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section className="py-20 relative overflow-hidden">
-                    <motion.div
-                        aria-hidden
-                        className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(circle_at_14%_24%,rgba(230,57,70,0.11),transparent_42%),radial-gradient(circle_at_84%_74%,rgba(6,214,160,0.11),transparent_46%)] blur-2xl will-change-transform"
-                        animate={{ y: [0, -5, 0] }}
-                        transition={{ duration: 21, repeat: Infinity, ease: 'easeInOut' }}
-                    />
+                <section className="py-20 relative overflow-hidden px-4 sm:px-6 lg:px-8">
                     <FloatingMetro type="station" size="lg" className="bottom-10 left-5" delay={1} />
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div {...fadeUpOnScroll} className="text-center mb-16">
@@ -203,13 +180,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section className="py-20 text-white relative overflow-hidden">
-                    <motion.div
-                        aria-hidden
-                        className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(circle_at_16%_76%,rgba(6,214,160,0.12),transparent_44%),radial-gradient(circle_at_86%_26%,rgba(230,57,70,0.1),transparent_42%)] blur-2xl will-change-transform"
-                        animate={{ x: [0, 4, 0] }}
-                        transition={{ duration: 23, repeat: Infinity, ease: 'easeInOut' }}
-                    />
+                <section className="py-20 text-white relative overflow-hidden px-4 sm:px-6 lg:px-8">
                     <FloatingMetro type="train" size="lg" className="top-20 right-10" delay={0.5} />
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div {...fadeUpOnScroll} className="text-center mb-16">
@@ -242,13 +213,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section className="py-20 relative overflow-hidden">
-                    <motion.div
-                        aria-hidden
-                        className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(circle_at_20%_22%,rgba(230,57,70,0.12),transparent_44%),radial-gradient(circle_at_78%_78%,rgba(6,214,160,0.12),transparent_45%)] blur-2xl will-change-transform"
-                        animate={{ y: [0, -4, 0], x: [0, -4, 0] }}
-                        transition={{ duration: 24, repeat: Infinity, ease: 'easeInOut' }}
-                    />
+                <section className="py-20 relative overflow-hidden px-4 sm:px-6 lg:px-8">
                     <FloatingMetro type="icon" size="md" className="top-20 left-10" delay={1} />
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <motion.div {...fadeUpOnScroll} className="text-center mb-16">
