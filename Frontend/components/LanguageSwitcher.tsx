@@ -24,10 +24,13 @@ const LanguageSwitcher = () => {
 
     if (!mounted) return null;
 
-    const currentLanguage = languages.find((lang) => lang.code === i18n.language) || languages[0];
+    const activeLanguageCode = (i18n.resolvedLanguage || i18n.language || 'en').toLowerCase().split('-')[0];
+    const currentLanguage = languages.find((lang) => lang.code === activeLanguageCode) || languages[0];
 
     const handleLanguageChange = (code: string) => {
-        i18n.changeLanguage(code);
+        void i18n.changeLanguage(code);
+        window.localStorage.setItem('roadchalLng', code);
+        window.localStorage.setItem('i18nextLng', code);
         setIsOpen(false);
     };
 
@@ -62,14 +65,14 @@ const LanguageSwitcher = () => {
                                 <button
                                     key={lang.code}
                                     onClick={() => handleLanguageChange(lang.code)}
-                                    className={`w-full flex items-center space-x-3 px-4 py-3 text-left transition-colors duration-200 ${i18n.language === lang.code
+                                    className={`w-full flex items-center space-x-3 px-4 py-3 text-left transition-colors duration-200 ${activeLanguageCode === lang.code
                                             ? 'bg-metro-teal/20 text-metro-teal'
                                             : 'text-white hover:bg-white/5'
                                         }`}
                                 >
                                     <span className="text-xl">{lang.flag}</span>
                                     <span className="font-medium">{lang.name}</span>
-                                    {i18n.language === lang.code && (
+                                    {activeLanguageCode === lang.code && (
                                         <motion.div
                                             layoutId="active-indicator"
                                             className="ml-auto w-2 h-2 rounded-full bg-metro-teal shadow-[0_0_8px_rgba(45,212,191,0.6)]"
