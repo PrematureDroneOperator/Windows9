@@ -11,8 +11,22 @@ import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { FaStar } from 'react-icons/fa';
 import ParticlesBackground from '@/components/ParticlesBackground';
 import CTA from '@/components/CTA';
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
+    const { t } = useTranslation();
+
+    const translatedFeatures = features.map((feature, index) => ({
+        ...feature,
+        title: t(`benefits.feature${index + 1}.title`),
+        description: t(`benefits.feature${index + 1}.desc`)
+    }));
+
+    const translatedTestimonials = testimonials.map((testimonial, index) => ({
+        ...testimonial,
+        role: t(`testimonials.user${index + 1}.role`),
+        text: t(`testimonials.user${index + 1}.text`)
+    }));
     return (
         <main className="min-h-screen relative">
             {/* Global Fixed Background */}
@@ -50,19 +64,19 @@ export default function Home() {
                                 variants={fadeIn}
                                 className="text-5xl md:text-7xl font-display font-bold text-white mb-6"
                             >
-                                Roadचल
+                                {t('hero.title')}
                             </motion.h1>
                             <motion.h2
                                 variants={slideUp}
                                 className="text-3xl md:text-5xl font-display font-bold text-gradient mb-6"
                             >
-                                Your Last Mile to Public Transit
+                                {t('hero.subtitle')}
                             </motion.h2>
                             <motion.p
                                 variants={fadeIn}
                                 className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto"
                             >
-                                Effortless rides from your doorstep to nearest Pune Metro station
+                                {t('hero.description')}
                             </motion.p>
                             <motion.div
                                 variants={slideUp}
@@ -70,17 +84,17 @@ export default function Home() {
                             >
                                 <Link href="/register">
                                     <Button variant="primary" size="lg">
-                                        Get Started
+                                        {t('hero.getStarted')}
                                     </Button>
                                 </Link>
                                 <Link href="/login">
                                     <Button variant="secondary" size="lg">
-                                        Login
+                                        {t('hero.login')}
                                     </Button>
                                 </Link>
                                 <Link href="/landing">
                                     <Button variant="outline" size="lg">
-                                        Learn More
+                                        {t('hero.learnMore')}
                                     </Button>
                                 </Link>
                             </motion.div>
@@ -100,22 +114,22 @@ export default function Home() {
                             className="text-center mb-16"
                         >
                             <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-                                How It Works
+                                {t('howItWorks.title')}
                             </h2>
                             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                                Three simple steps to seamless metro connectivity
+                                {t('howItWorks.subtitle')}
                             </p>
                         </motion.div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {[
-                                { step: 1, icon: '📱', title: 'Book Your Ride', desc: 'Enter your location and nearest metro station' },
-                                { step: 2, icon: '🚗', title: 'Get Picked Up', desc: 'Our driver arrives at your doorstep' },
-                                { step: 3, icon: '🚇', title: 'Reach Metro', desc: 'Dropped off right at the metro entrance' }
+                                { step: 1, icon: '📱', title: t('howItWorks.step1.title'), desc: t('howItWorks.step1.desc') },
+                                { step: 2, icon: '🚗', title: t('howItWorks.step2.title'), desc: t('howItWorks.step2.desc') },
+                                { step: 3, icon: '🚇', title: t('howItWorks.step3.title'), desc: t('howItWorks.step3.desc') }
                             ].map((item) => (
                                 <Card key={item.step} glass className="text-center">
                                     <div className="text-6xl mb-4">{item.icon}</div>
-                                    <div className="text-metro-red font-bold text-lg mb-2">Step {item.step}</div>
+                                    <div className="text-metro-red font-bold text-lg mb-2">{t('howItWorks.stepLabel')} {item.step}</div>
                                     <h3 className="text-2xl font-display font-bold text-white mb-3">
                                         {item.title}
                                     </h3>
@@ -138,15 +152,15 @@ export default function Home() {
                             className="text-center mb-16"
                         >
                             <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-                                Why Choose Roadचल?
+                                {t('benefits.title')}
                             </h2>
                             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                                Built for modern commuters who value time and convenience
+                                {t('benefits.subtitle')}
                             </p>
                         </motion.div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {features.map((feature) => (
+                            {translatedFeatures.map((feature) => (
                                 <Card key={feature.id} glass className="text-center">
                                     <div className="text-5xl mb-4">{feature.icon}</div>
                                     <h3 className="text-xl font-display font-bold text-white mb-3">
@@ -171,19 +185,23 @@ export default function Home() {
                             className="text-center mb-16"
                         >
                             <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-                                Experience the App
+                                {t('experience.title')}
                             </h2>
                             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                                Sleek, intuitive, and designed for speed
+                                {t('experience.subtitle')}
                             </p>
                         </motion.div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {['📱 Tracking', '🗺️ Map View', '📊 Dashboard'].map((screen, index) => (
+                            {[
+                                { icon: '📱', label: t('experience.tracking') },
+                                { icon: '🗺️', label: t('experience.mapView') },
+                                { icon: '📊', label: t('experience.dashboard') }
+                            ].map((screen, index) => (
                                 <Card key={index} glass className="text-center h-80 flex items-center justify-center">
                                     <div>
-                                        <div className="text-6xl mb-4">{screen.split(' ')[0]}</div>
-                                        <p className="text-2xl font-display font-bold">{screen.split(' ').slice(1).join(' ')}</p>
+                                        <div className="text-6xl mb-4">{screen.icon}</div>
+                                        <p className="text-2xl font-display font-bold">{screen.label}</p>
                                     </div>
                                 </Card>
                             ))}
@@ -203,15 +221,15 @@ export default function Home() {
                             className="text-center mb-16"
                         >
                             <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-                                What Our Users Say
+                                {t('testimonials.title')}
                             </h2>
                             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                                Join thousands of happy commuters
+                                {t('testimonials.subtitle')}
                             </p>
                         </motion.div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {testimonials.map((testimonial) => (
+                            {translatedTestimonials.map((testimonial) => (
                                 <Card key={testimonial.id} glass className="text-center">
                                     <div className="text-6xl mb-4">{testimonial.image}</div>
                                     <div className="flex justify-center mb-3">

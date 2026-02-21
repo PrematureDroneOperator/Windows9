@@ -7,24 +7,26 @@ import FloatingMetro from '@/components/FloatingMetro';
 import Card from '@/components/Card';
 import CTA from '@/components/CTA';
 import { staggerContainer, fadeIn, slideUp } from '@/lib/animations';
+import { useTranslation } from 'react-i18next';
 
 export default function PrivacyPolicyPage() {
+    const { t } = useTranslation();
     const sections = [
         {
-            title: "Information We Collect",
-            content: "We collect information you provide directly to us, such as when you create an account, book a ride, or contact our support team. This may include your name, email address, phone number, and location data."
+            title: t('privacy.sections.collect.title'),
+            content: t('privacy.sections.collect.content')
         },
         {
-            title: "How We Use Your Information",
-            content: "We use the information we collect to provide, maintain, and improve our services, including to process your bookings, send you updates about your rides, and respond to your inquiries."
+            title: t('privacy.sections.use.title'),
+            content: t('privacy.sections.use.content')
         },
         {
-            title: "Data Security",
-            content: "We take reasonable measures to help protect information about you from loss, theft, misuse, and unauthorized access, disclosure, alteration, and destruction."
+            title: t('privacy.sections.security.title'),
+            content: t('privacy.sections.security.content')
         },
         {
-            title: "Your Rights",
-            content: "You have the right to access, update, or delete your personal information. If you have any questions or concerns about how we handle your data, please contact us."
+            title: t('privacy.sections.rights.title'),
+            content: t('privacy.sections.rights.content')
         }
     ];
 
@@ -52,13 +54,13 @@ export default function PrivacyPolicyPage() {
                         variants={fadeIn}
                         className="text-4xl md:text-5xl font-display font-bold text-white mb-4"
                     >
-                        Privacy <span className="text-gradient">Policy</span>
+                        {t('privacy.titlePrefix')} <span className="text-gradient">{t('privacy.titleHighlight')}</span>
                     </motion.h1>
                     <motion.p
                         variants={fadeIn}
                         className="text-xl text-gray-300"
                     >
-                        Last updated: February 18, 2026
+                        {t('privacy.lastUpdated')}
                     </motion.p>
                 </motion.div>
 
@@ -86,7 +88,7 @@ export default function PrivacyPolicyPage() {
 
                     <motion.div variants={fadeIn} className="text-center pt-8">
                         <p className="text-gray-400">
-                            If you have any questions about this Privacy Policy, please contact us at{" "}
+                            {t('privacy.contactPrefix')}{" "}
                             <a href="mailto:privacy@roadchal.com" className="text-metro-teal hover:underline font-bold">
                                 privacy@roadchal.com
                             </a>

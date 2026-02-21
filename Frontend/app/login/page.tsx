@@ -9,8 +9,10 @@ import Card from '@/components/Card';
 import Button from '@/components/Button';
 import { FaGoogle, FaApple } from 'react-icons/fa';
 import ParticlesBackground from '@/components/ParticlesBackground';
+import { useTranslation } from 'react-i18next';
 
 export default function LoginPage() {
+    const { t } = useTranslation();
     const router = useRouter();
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
@@ -20,7 +22,7 @@ export default function LoginPage() {
         setError('');
 
         if (!formData.email || !formData.password) {
-            setError('Please fill in all fields');
+            setError(t('login.errors.fillAllFields'));
             return;
         }
 
@@ -36,7 +38,7 @@ export default function LoginPage() {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.detail || 'Login failed');
+                throw new Error(data.detail || t('login.errors.loginFailed'));
             }
 
             // Store session/user in localStorage for now (simplified)
@@ -47,7 +49,7 @@ export default function LoginPage() {
 
             router.push('/dashboard');
         } catch (err: any) {
-            setError(err.message || 'An error occurred during login');
+            setError(err.message || t('login.errors.general'));
         }
     };
 
@@ -75,8 +77,8 @@ export default function LoginPage() {
                     >
                         {/* Title */}
                         <div className="text-center mb-8">
-                            <h1 className="text-4xl font-display font-bold text-white mb-2">Welcome Back</h1>
-                            <p className="text-gray-300">Sign in to access your account</p>
+                            <h1 className="text-4xl font-display font-bold text-white mb-2">{t('login.title')}</h1>
+                            <p className="text-gray-300">{t('login.subtitle')}</p>
                         </div>
 
                         {/* Login Card */}
@@ -84,19 +86,19 @@ export default function LoginPage() {
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 {/* Email */}
                                 <div>
-                                    <label className="block text-white font-medium mb-2">Email</label>
+                                    <label className="block text-white font-medium mb-2">{t('login.email')}</label>
                                     <input
                                         type="email"
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                         className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-metro-teal transition-all"
-                                        placeholder="your.email@example.com"
+                                        placeholder={t('login.emailPlaceholder')}
                                     />
                                 </div>
 
                                 {/* Password */}
                                 <div>
-                                    <label className="block text-white font-medium mb-2">Password</label>
+                                    <label className="block text-white font-medium mb-2">{t('login.password')}</label>
                                     <input
                                         type="password"
                                         value={formData.password}
@@ -120,13 +122,13 @@ export default function LoginPage() {
                                 {/* Forgot Password */}
                                 <div className="text-right">
                                     <a href="#" className="text-metro-teal hover:underline text-sm">
-                                        Forgot Password?
+                                        {t('login.forgotPassword')}
                                     </a>
                                 </div>
 
                                 {/* Submit Button */}
                                 <Button type="submit" variant="primary" className="w-full">
-                                    Sign In
+                                    {t('login.signIn')}
                                 </Button>
                             </form>
 
@@ -136,7 +138,7 @@ export default function LoginPage() {
                                     <div className="w-full border-t border-white/20"></div>
                                 </div>
                                 <div className="relative flex justify-center text-sm">
-                                    <span className="px-2 bg-transparent text-gray-400">Or continue with</span>
+                                    <span className="px-2 bg-transparent text-gray-400">{t('login.orContinueWith')}</span>
                                 </div>
                             </div>
 
@@ -160,9 +162,9 @@ export default function LoginPage() {
 
                             {/* Sign Up Link */}
                             <div className="mt-6 text-center text-gray-300">
-                                Don't have an account?{' '}
+                                {t('login.noAccount')}{' '}
                                 <Link href="/register" className="text-metro-teal hover:underline font-semibold">
-                                    Sign Up
+                                    {t('login.signUp')}
                                 </Link>
                             </div>
                         </Card>

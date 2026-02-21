@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPaperPlane, FaRobot, FaUser } from 'react-icons/fa';
 import Card from './Card';
+import { useTranslation } from 'react-i18next';
 
 interface Message {
     id: string;
@@ -13,10 +14,11 @@ interface Message {
 }
 
 const Chatbot = () => {
+    const { t } = useTranslation();
     const [messages, setMessages] = useState<Message[]>([
         {
             id: '1',
-            text: "Hello! I'm your Roadचल assistant. How can I help you today?",
+            text: t('chatbot.welcome'),
             sender: 'bot',
             timestamp: new Date(),
         }
@@ -61,7 +63,7 @@ const Chatbot = () => {
 
             const botMessage: Message = {
                 id: (Date.now() + 1).toString(),
-                text: data.reply || "I'm sorry, I couldn't process that.",
+                text: data.reply || t('chatbot.fallbackReply'),
                 sender: 'bot',
                 timestamp: new Date(),
             };
@@ -70,7 +72,7 @@ const Chatbot = () => {
             console.error('Error fetching chatbot response:', error);
             const errorMessage: Message = {
                 id: (Date.now() + 1).toString(),
-                text: "Sorry, I'm having trouble connecting to the server. Please try again later.",
+                text: t('chatbot.connectionError'),
                 sender: 'bot',
                 timestamp: new Date(),
             };
@@ -90,7 +92,7 @@ const Chatbot = () => {
                     </div>
                     <div>
                         <h3 className="text-white font-bold">Roadचल Assistant</h3>
-                        <p className="text-xs text-metro-teal font-medium">Online</p>
+                        <p className="text-xs text-metro-teal font-medium">{t('chatbot.online')}</p>
                     </div>
                 </div>
             </div>
@@ -152,7 +154,7 @@ const Chatbot = () => {
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                        placeholder="Type your message..."
+                        placeholder={t('chatbot.typeMessage')}
                         className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-metro-teal transition-colors"
                     />
                     <motion.button

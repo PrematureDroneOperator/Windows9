@@ -4,8 +4,11 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
+    const { t } = useTranslation();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -18,14 +21,14 @@ const Navbar = () => {
     }, []);
 
     const navLinks = [
-        { href: '/', label: 'Home' },
-        { href: '/landing', label: 'About' },
-        { href: '/metro-details', label: 'Metro' },
-        { href: '/tracking', label: 'Track' },
-        { href: '/chatbot', label: 'Chat' },
-        { href: '/contact', label: 'Contact' },
-        { href: '/dashboard', label: 'Dashboard' },
-        { href: '/login', label: 'Login' }
+        { href: '/', label: t('nav.home') },
+        { href: '/landing', label: t('nav.about') },
+        { href: '/metro-details', label: t('nav.metro') },
+        { href: '/tracking', label: t('nav.track') },
+        { href: '/chatbot', label: t('nav.chat') },
+        { href: '/contact', label: t('nav.contact') },
+        { href: '/dashboard', label: t('nav.dashboard') },
+        { href: '/login', label: t('nav.login') }
     ];
 
     return (
@@ -63,19 +66,23 @@ const Navbar = () => {
                                 </motion.span>
                             </Link>
                         ))}
-                        <Link href="/register">
-                            <motion.button
-                                className="btn-secondary"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                Get Started
-                            </motion.button>
-                        </Link>
+                        <div className="flex items-center space-x-4">
+                            <LanguageSwitcher />
+                            <Link href="/register">
+                                <motion.button
+                                    className="btn-secondary"
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    {t('nav.getStarted')}
+                                </motion.button>
+                            </Link>
+                        </div>
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <div className="md:hidden">
+                    <div className="md:hidden flex items-center space-x-4">
+                        <LanguageSwitcher />
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             className="text-white text-2xl"
@@ -84,6 +91,7 @@ const Navbar = () => {
                         </button>
                     </div>
                 </div>
+
 
                 {/* Mobile Menu */}
                 {mobileMenuOpen && (
@@ -108,7 +116,7 @@ const Navbar = () => {
                                 className="btn-secondary w-full mt-2"
                                 onClick={() => setMobileMenuOpen(false)}
                             >
-                                Get Started
+                                {t('nav.getStarted')}
                             </button>
                         </Link>
                     </motion.div>

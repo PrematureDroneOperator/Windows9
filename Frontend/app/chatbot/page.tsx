@@ -7,8 +7,10 @@ import ParticlesBackground from '@/components/ParticlesBackground';
 import FloatingMetro from '@/components/FloatingMetro';
 import CTA from '@/components/CTA';
 import { staggerContainer, fadeIn } from '@/lib/animations';
+import { useTranslation } from 'react-i18next';
 
 export default function ChatbotPage() {
+    const { t } = useTranslation();
     return (
         <main className="min-h-screen relative flex flex-col pt-24 pb-12 overflow-hidden">
             {/* Global Fixed Background */}
@@ -32,10 +34,10 @@ export default function ChatbotPage() {
                 >
                     <motion.div variants={fadeIn} className="text-center mb-8">
                         <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-                            Chat with <span className="text-gradient">Roadचल</span>
+                            {t('chatbotPage.titlePrefix')} <span className="text-gradient">Roadचल</span>
                         </h1>
                         <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                            Got questions? Our AI assistant is here to help you navigate Pune's metro connectivity.
+                            {t('chatbotPage.subtitle')}
                         </p>
                     </motion.div>
 

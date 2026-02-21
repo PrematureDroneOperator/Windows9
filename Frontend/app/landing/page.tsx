@@ -10,8 +10,16 @@ import { features } from '@/lib/mockData';
 import { fadeIn, slideUp } from '@/lib/animations';
 import ParticlesBackground from '@/components/ParticlesBackground';
 import CTA from '@/components/CTA';
+import { useTranslation } from 'react-i18next';
 
 export default function LandingPage() {
+    const { t } = useTranslation();
+    const translatedFeatures = features.map((feature, index) => ({
+        ...feature,
+        title: t(`benefits.feature${index + 1}.title`),
+        description: t(`benefits.feature${index + 1}.desc`),
+    }));
+
     return (
         <main className="min-h-screen relative flex flex-col">
             {/* Global Fixed Background */}
@@ -39,15 +47,15 @@ export default function LandingPage() {
                             variants={fadeIn}
                         >
                             <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-6">
-                                Revolutionizing<br />
-                                <span className="text-gradient">Last-Mile Connectivity</span>
+                                {t('landing.hero.titleLine1')}<br />
+                                <span className="text-gradient">{t('landing.hero.titleLine2')}</span>
                             </h1>
                             <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-                                Bridging the gap between your home and Pune Metro with smart, affordable, and reliable transportation
+                                {t('landing.hero.description')}
                             </p>
                             <Link href="/register">
                                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    <Button variant="primary" size="lg">Download the App</Button>
+                                    <Button variant="primary" size="lg">{t('landing.hero.downloadApp')}</Button>
                                 </motion.div>
                             </Link>
                         </motion.div>
@@ -59,15 +67,15 @@ export default function LandingPage() {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="text-center mb-16">
                             <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
-                                Comprehensive Features
+                                {t('landing.features.title')}
                             </h2>
                             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                                Everything you need for a seamless commuting experience
+                                {t('landing.features.subtitle')}
                             </p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {features.map((feature) => (
+                            {translatedFeatures.map((feature) => (
                                 <Card key={feature.id} glass className="text-center">
                                     <div className="text-5xl mb-4">{feature.icon}</div>
                                     <h3 className="text-xl font-display font-bold text-white mb-3">
@@ -92,18 +100,17 @@ export default function LandingPage() {
                                 viewport={{ once: true }}
                             >
                                 <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-                                    Seamless Pune Metro Integration
+                                    {t('landing.integration.title')}
                                 </h2>
                                 <p className="text-lg text-gray-300 mb-6">
-                                    Roadचल connects you to all major Pune Metro stations including Vanaz, Anand Nagar,
-                                    Deccan Gymkhana, Civil Court, and Swargate. We optimize routes to ensure you never miss your metro.
+                                    {t('landing.integration.description')}
                                 </p>
                                 <ul className="space-y-4">
                                     {[
-                                        'Real-time metro schedule integration',
-                                        'Station-specific pickup and drop points',
-                                        'Coordinated timing to match metro arrivals',
-                                        'Coverage across all metro lines'
+                                        t('landing.integration.points.p1'),
+                                        t('landing.integration.points.p2'),
+                                        t('landing.integration.points.p3'),
+                                        t('landing.integration.points.p4')
                                     ].map((item, index) => (
                                         <li key={index} className="flex items-start">
                                             <span className="text-metro-teal text-xl mr-2">✓</span>
@@ -121,8 +128,8 @@ export default function LandingPage() {
                             >
                                 <Card glass className="p-12 text-center">
                                     <div className="text-9xl mb-4">🗺️</div>
-                                    <h3 className="text-2xl font-bold text-white">Metro Route Map</h3>
-                                    <p className="text-gray-300 mt-2">Interactive station coverage</p>
+                                    <h3 className="text-2xl font-bold text-white">{t('landing.integration.mapTitle')}</h3>
+                                    <p className="text-gray-300 mt-2">{t('landing.integration.mapSubtitle')}</p>
                                 </Card>
                             </motion.div>
                         </div>
@@ -134,18 +141,18 @@ export default function LandingPage() {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="text-center mb-16">
                             <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-                                Built for Modern Commuters
+                                {t('landing.modern.title')}
                             </h2>
                             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                                Intuitive design meets powerful functionality
+                                {t('landing.modern.subtitle')}
                             </p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {[
-                                { emoji: '📱', title: 'Live Tracking', desc: 'Track your ride in real-time' },
-                                { emoji: '💳', title: 'Easy Payments', desc: 'Multiple payment options' },
-                                { emoji: '📊', title: 'Trip Analytics', desc: 'Insights on your journeys' }
+                                { emoji: '📱', title: t('landing.modern.cards.liveTracking.title'), desc: t('landing.modern.cards.liveTracking.desc') },
+                                { emoji: '💳', title: t('landing.modern.cards.easyPayments.title'), desc: t('landing.modern.cards.easyPayments.desc') },
+                                { emoji: '📊', title: t('landing.modern.cards.tripAnalytics.title'), desc: t('landing.modern.cards.tripAnalytics.desc') }
                             ].map((item, index) => (
                                 <Card key={index} glass className="text-center h-72 flex flex-col items-center justify-center">
                                     <div className="text-7xl mb-4">{item.emoji}</div>

@@ -9,8 +9,10 @@ import Button from '@/components/Button';
 import CTA from '@/components/CTA';
 import { staggerContainer, fadeIn, slideUp } from '@/lib/animations';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 export default function ContactPage() {
+    const { t } = useTranslation();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -32,9 +34,9 @@ export default function ContactPage() {
     };
 
     const contactInfo = [
-        { icon: <FaEnvelope />, label: 'Email Us', value: 'support@roadchal.com', color: 'bg-metro-red' },
-        { icon: <FaPhone />, label: 'Call Us', value: '+91 98765 43210', color: 'bg-metro-teal' },
-        { icon: <FaMapMarkerAlt />, label: 'Visit Us', value: 'Pune Metro HQ, Shivajinagar, Pune', color: 'bg-metro-red' }
+        { icon: <FaEnvelope />, label: t('contact.emailUs'), value: 'support@roadchal.com', color: 'bg-metro-red' },
+        { icon: <FaPhone />, label: t('contact.callUs'), value: '+91 98765 43210', color: 'bg-metro-teal' },
+        { icon: <FaMapMarkerAlt />, label: t('contact.visitUs'), value: 'Pune Metro HQ, Shivajinagar, Pune', color: 'bg-metro-red' }
     ];
 
     return (
@@ -61,13 +63,13 @@ export default function ContactPage() {
                         variants={fadeIn}
                         className="text-4xl md:text-6xl font-display font-bold text-white mb-4"
                     >
-                        Get in <span className="text-gradient">Touch</span>
+                        {t('contact.titlePrefix')} <span className="text-gradient">{t('contact.titleHighlight')}</span>
                     </motion.h1>
                     <motion.p
                         variants={fadeIn}
                         className="text-xl text-gray-300 max-w-2xl mx-auto"
                     >
-                        Have questions about our service? We're here to help you make your daily commute effortless.
+                        {t('contact.subtitle')}
                     </motion.p>
                 </motion.div>
 
@@ -111,64 +113,64 @@ export default function ContactPage() {
                                     <div className="w-20 h-20 bg-metro-teal rounded-full flex items-center justify-center text-white text-4xl mx-auto mb-6 shadow-lg shadow-metro-teal/20">
                                         ✓
                                     </div>
-                                    <h2 className="text-3xl font-bold text-white mb-2">Message Sent!</h2>
-                                    <p className="text-gray-300 text-lg">Thank you for reaching out. We'll get back to you shortly.</p>
+                                    <h2 className="text-3xl font-bold text-white mb-2">{t('contact.messageSent')}</h2>
+                                    <p className="text-gray-300 text-lg">{t('contact.thankYou')}</p>
                                     <button
                                         onClick={() => setSubmitted(false)}
                                         className="mt-8 text-metro-teal font-bold hover:underline"
                                     >
-                                        Send another message
+                                        {t('contact.sendAnother')}
                                     </button>
                                 </motion.div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
-                                            <label className="text-sm font-medium text-gray-300 ml-1">Your Name</label>
+                                            <label className="text-sm font-medium text-gray-300 ml-1">{t('contact.yourName')}</label>
                                             <input
                                                 required
                                                 type="text"
                                                 name="name"
                                                 value={formData.name}
                                                 onChange={handleChange}
-                                                placeholder="John Doe"
+                                                placeholder={t('contact.namePlaceholder')}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-metro-red transition-colors"
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-sm font-medium text-gray-300 ml-1">Email Address</label>
+                                            <label className="text-sm font-medium text-gray-300 ml-1">{t('contact.emailAddress')}</label>
                                             <input
                                                 required
                                                 type="email"
                                                 name="email"
                                                 value={formData.email}
                                                 onChange={handleChange}
-                                                placeholder="john@example.com"
+                                                placeholder={t('contact.emailPlaceholder')}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-metro-teal transition-colors"
                                             />
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium text-gray-300 ml-1">Subject</label>
+                                        <label className="text-sm font-medium text-gray-300 ml-1">{t('contact.subject')}</label>
                                         <input
                                             required
                                             type="text"
                                             name="subject"
                                             value={formData.subject}
                                             onChange={handleChange}
-                                            placeholder="How can we help?"
+                                            placeholder={t('contact.subjectPlaceholder')}
                                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-metro-red transition-colors"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium text-gray-300 ml-1">Message</label>
+                                        <label className="text-sm font-medium text-gray-300 ml-1">{t('contact.message')}</label>
                                         <textarea
                                             required
                                             name="message"
                                             value={formData.message}
                                             onChange={handleChange}
                                             rows={5}
-                                            placeholder="Tell us more about your inquiry..."
+                                            placeholder={t('contact.messagePlaceholder')}
                                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-metro-teal transition-colors resize-none"
                                         ></textarea>
                                     </div>
@@ -179,7 +181,7 @@ export default function ContactPage() {
                                         className="w-full gradient-metro text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 shadow-xl shadow-metro-red/20"
                                     >
                                         <FaPaperPlane className="text-sm" />
-                                        Send Message
+                                        {t('contact.sendMessage')}
                                     </motion.button>
                                 </form>
                             )}
